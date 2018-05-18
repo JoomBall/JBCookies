@@ -1,9 +1,10 @@
 # JBCookies
 JBCookies displays information about the use of cookies. The module is ready to support any multilanguage page.
 
+<img src="http://www.joomball.com/images/template/toolbar/icon-256-jbcookies.png" alt="JBCookies">
 <h3>Product details</h3>
-<p><strong>Package:</strong>&nbsp; <img src="http://www.joomball.com/images/template/ext_mod.png" alt=""> <em><br></em></p>
-<p><strong>Compatibility:</strong> <em><img src="http://www.joomball.com/images/template/extension/icon/compat_30.png" alt=""></em></p>
+<p><strong>Package:</strong>&nbsp; <img src="http://www.joomball.com/images/template/ext_mod.png" alt="Module"> <em><br></em></p>
+<p><strong>Compatibility:</strong> <em><img src="http://www.joomball.com/images/template/extension/icon/compat_30.png" alt="Joomla"></em></p>
 <p><strong>License:</strong> <em>Non-Commercial</em></p>
 <p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE)</em></p>
 
