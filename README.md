@@ -5,7 +5,7 @@ JBCookies displays information about the use of cookies. The module is ready to 
 <p><strong>Package:</strong>&nbsp; <img src="http://www.joomball.com/images/template/ext_mod.png" alt=""> <em><br></em></p>
 <p><strong>Compatibility:</strong> <em><img src="http://www.joomball.com/images/template/extension/icon/compat_30.png" alt=""></em></p>
 <p><strong>License:</strong> <em>Non-Commercial</em></p>
-<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT)<br></em></p>
+<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE)<br></em></p>
 
 <h3>Requirements for installation</h3>
 <ul>
