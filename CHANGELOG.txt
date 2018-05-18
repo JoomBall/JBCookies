@@ -1,0 +1,24 @@
+JBCookies 3.0.7 (25-08-2015)
+================================================================================
++ Add French
+
+JBCookies 3.0.6 (08-06-2015)
+================================================================================
++ No index follow
+
+JBCookies 3.0.5 (13-05-2015)
+================================================================================
++ Add select article in modal
++ Add Italian
+
+JBCookies 3.0.4 (19-03-2015)
+================================================================================
+~ Error in jblanguages new installation
++ Add fieldset select framework modal: Bootstrap or Uikit
+
+JBCookies 3.0.3 (02-03-2015)
+================================================================================
+~ Error in jblanguages header in modal
++ Add fieldset advanced
++ Add update module
+

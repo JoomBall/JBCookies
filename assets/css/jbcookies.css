@@ -1,0 +1,176 @@
+/**
+ * @package			Joomla.Site
+ * @subpackage		Modules - mod_jbcookies
+ * 
+ * @author			JoomBall! Project
+ * @link			http://www.joomball.com
+ * @copyright		Copyright © 2011-2014 JoomBall! Project. All Rights Reserved.
+ * @license			GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html
+ */
+
+.jb.cookie {
+	position: fixed!important;
+	z-index: 999;
+	width: 100%!important;
+	height: auto;
+	text-align: center;
+	display: none;
+	box-shadow: 0 0 40px #444;
+	padding: 10px 0;
+	left: 0;
+	right: 0;
+	float: none!important;
+	text-shadow: none;
+	border-radius: 0!important;
+	margin: 0 auto!important;
+}
+
+.jb.cookie.top {
+	top: 0px;
+}
+
+.jb.cookie.bottom {
+	bottom: 0px;
+}
+
+.jb.cookie div.cookie-bg {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0; 
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	position: absolute;
+	z-index: -1;
+}
+
+.jb.cookie-bg.black {
+	background-color: black;
+}
+
+.jb.cookie-bg.white {
+	background-color: white;
+}
+
+.jb.black {
+	color: white;
+}
+
+.jb.white {
+	color: black;
+}
+
+.jb.cookie p {
+	margin: 4px 0;
+	padding: 0;
+	float: none!important;
+}
+
+.jb.cookie h2 {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0;
+	line-height: 25px;
+}
+
+.jb.cookie p {
+	font-size: 14px
+}
+
+.jb.cookie p a {
+	cursor: pointer;
+	float: none!important;
+}
+
+.jb.accept {
+	cursor: pointer;
+	font-size: 14px;
+	margin: 5px auto;
+	min-width: 100px;
+	padding: 4px 12px;
+	border-radius: 4px;
+	text-shadow: 1px 1px 0 #0072ca;
+	color: #fff;
+	background-image: -webkit-linear-gradient(#0089F2 0%, #0072ca 100%);
+	background-image: -moz-linear-gradient(#0089F2 0%, #0072ca 100%);
+	background-image: -o-linear-gradient(#0089F2 0%, #0072ca 100%);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0089F2), to(#0072ca));
+	background-image: linear-gradient(#0089F2 0%, #0072ca 100%);
+	float: none!important;
+}
+
+.jb.accept:hover {
+	box-shadow: 0 0 15px #000;
+}
+
+/* COLORS LINKS */
+.jb.top.blue .jb.cookie-bg.white, .jb.top.blue .jb.cookie-bg.black {
+	border-bottom: 1px solid #0089f2;
+}
+
+.jb.top.green .jb.cookie-bg.white, .jb.top.green .jb.cookie-bg.black {
+	border-bottom: 1px solid #52a552;
+}
+
+.jb.top.orange .jb.cookie-bg.white, .jb.top.orange .jb.cookie-bg.black {
+	border-bottom: 1px solid #e88a05;
+}
+
+.jb.top.red .jb.cookie-bg.white, .jb.top.red .jb.cookie-bg.black {
+	border-bottom: 1px solid #dd2f26;
+}
+
+.jb.bottom.blue .jb.cookie-bg.white, .jb.bottom.blue .jb.cookie-bg.black {
+	border-top: 1px solid #0089f2;
+}
+
+.jb.bottom.green .jb.cookie-bg.white, .jb.bottom.green .jb.cookie-bg.black {
+	border-top: 1px solid #52a552;
+}
+
+.jb.bottom.orange .jb.cookie-bg.white, .jb.bottom.orange .jb.cookie-bg.black {
+	border-top: 1px solid #e88a05;
+}
+
+.jb.bottom.red .jb.cookie-bg.white, .jb.bottom.red .jb.cookie-bg.black {
+	border-top: 1px solid #dd2f26;
+}
+
+.jb.cookie.blue p a {
+	color: #0089f2;
+}
+
+.jb.cookie.green p a {
+	color: #52a552;
+}
+
+.jb.cookie.orange p a {
+	color: #e88a05;
+}
+
+.jb.cookie.red p a {
+	color: #dd2f26;
+}
+
+.jb.accept.blue {
+	background: #0089f2;
+}
+
+.jb.accept.green {
+	background: #52a552;
+}
+
+.jb.accept.orange {
+	background: #e88a05;
+}
+
+.jb.accept.red {
+	background: #dd2f26;
+}
+
+/* MODAL */
+#jbcookies .modal-body {
+	max-height: 400px !important;
+}
+
+

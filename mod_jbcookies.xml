@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension
+	type="module"
+	version="3.0"
+	client="site"
+	method="upgrade">
+	
+	<name>mod_jbcookies</name>
+	<author>JoomBall! Project</author>
+	<creationDate>August 2014</creationDate>
+	<authorEmail>info@joomball.com</authorEmail>
+	<authorUrl>http://www.joomball.com</authorUrl>
+	<copyright>Copyright © 2011-2015 JoomBall! Project - All Rights Reserved</copyright>
+	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<version>3.0.7</version>
+	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
+	
+	<files>
+		<filename module="mod_jbcookies">mod_jbcookies.php</filename>
+		<filename>CHANGELOG.txt</filename>
+		<filename>index.html</filename>
+		<filename>mod_jbcookies.xml</filename>
+		
+		<folder>assets</folder>
+		<folder>fields</folder>
+		<folder>language</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_jbcookies/fields">
+			<fieldset name="basic">
+			
+				<field
+					name="header_butttons"
+					type="jbbuttons"
+					url_site_joomball="http://www.joomball.com"
+					url_site_joomball_download="http://www.joomball.com/en/products/jbcookies"
+					url_site_joomball_demo="http://www.joomball.com/en/products/jbcookies"
+					url_site_joomla_extensions="http://extensions.joomla.org/extensions/site-management/cookie-control/27911" />
+				
+				<field
+					name="note_vote_msg"
+					type="jbmessage"
+					message="note"
+					label="JBVOTE_TITLE" />
+				
+				<field
+					name="version_msg"
+					type="jbmessage"
+					message="version"
+					path="../modules/mod_jbcookies/"
+					xml="mod_jbcookies.xml"
+					extension_name="mod_jbcookies" />
+					
+				<field
+					name="position"
+					type="list"
+					default="bottom"
+					label="COM_MODULES_FIELD_POSITION_LABEL"
+					description="COM_MODULES_FIELD_POSITION_DESC" >
+					
+					<option value="top">JGLOBAL_TOP</option>
+					<option value="bottom">JGLOBAL_DOWN</option>
+				</field>
+				
+                <field
+                    name="color_background"
+                    type="list"
+                    default="black"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_BACKGROUND"
+                    description="COM_MODULES_FIELD_MODULE_STYLE_DESC" >
+                    
+                    <option value="white">MOD_JBCOOKIES_GLOBAL_WHITE</option>
+                    <option value="black">MOD_JBCOOKIES_GLOBAL_BLACK</option>
+                </field>
+                
+                <field
+                    name="color_links"
+                    type="list"
+                    default="blue"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
+                    description="COM_MODULES_FIELD_MODULE_STYLE_DESC" >
+                    
+                    <option value="blue">MOD_JBCOOKIES_GLOBAL_BLUE</option>
+                    <option value="green">MOD_JBCOOKIES_GLOBAL_GREEN</option>
+                    <option value="orange">MOD_JBCOOKIES_GLOBAL_ORANGE</option>
+                    <option value="red">MOD_JBCOOKIES_GLOBAL_RED</option>
+                </field>
+                
+                <field
+                    name="show_info"
+                    type="radio"
+					default="1"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_SHOW_INFO_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_SHOW_INFO_DESC" >
+                    
+                    <option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+                </field>
+                
+                <field
+                    name="modal"
+                    type="radio"
+					default="bootstrap"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_FRAMEWORK_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_FRAMEWORK_DESC"
+                    showon="show_info:1" >
+                    
+                    <option value="bootstrap">Bootstrap</option>
+					<option value="uikit">Uikit</option>
+                </field>
+                
+                <field
+                    name="show_article_modal"
+                    type="radio"
+					default="1"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_SHOW_ATICLE_MODAL_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_SHOW_ATICLE_MODAL_DESC"
+                    showon="show_info:1" >
+                    
+                    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+                </field>
+                
+			</fieldset>
+			
+			<fieldset name="languages" label="MOD_JBCOOKIES_LANGUAGES_FIELDSET_LABEL">
+				
+				<field
+					name="lang"
+					type="jblanguages"
+					class="span12" >
+				</field>
+                   
+            </fieldset>
+            
+            <fieldset name="advanced">
+				
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				
+				<field
+					name="moduleclass_sfx"
+					type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+		
+			</fieldset>
+			
+		</fields>
+	</config>
+	
+	<!-- Update servers -->
+	<updateservers>
+		<server type="extension" priority="1" element="mod_jbcookies" name="JBCookies">http://www.joomball.com/images/updates/jbcookies.xml</server>
+	</updateservers>
+	
+</extension>
