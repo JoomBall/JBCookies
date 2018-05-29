@@ -12,16 +12,50 @@
 defined('_JEXEC') or die;
 ?>
 <!--googleoff: all-->
+<style type="text/css">  
+	.jb.cookie.color p a {
+		color: <?php echo $color_links; ?>;
+	} 
+
+	.jb.bgcolor {
+		background: <?php echo $color_background; ?>;
+	}
+	
+	.jb.cookie.top {
+		border-bottom: 1px solid <?php echo $btn_border_color; ?>;
+	}
+
+	.jb.cookie.bottom {
+		border-top: 1px solid <?php echo $color_links; ?>;
+	}
+	
+	.jb.color {
+		color: <?php echo $color_text; ?>;
+	}
+	.jb.accept {
+		color: <?php echo $btn_text_color; ?>;
+		background-image: -webkit-linear-gradient(<?php echo $btn_start_color; ?> 0%, <?php echo $btn_end_color; ?> 100%);
+		background-image: -moz-linear-gradient(<?php echo $btn_start_color; ?> 0%, <?php echo $btn_end_color; ?> 100%);
+		background-image: -o-linear-gradient(<?php echo $btn_start_color; ?> 0%, <?php echo $btn_end_color; ?> 100%);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(<?php echo $btn_start_color; ?>), to(<?php echo $btn_end_color; ?>));
+		background-image: linear-gradient(<?php echo $btn_start_color; ?> 0%, <?php echo $btn_end_color; ?> 100%);
+		max-width: <?php echo $btn_width; ?>;
+		height: <?php echo $btn_height; ?>;
+		line-height: <?php echo $btn_height; ?>;
+		padding: 0;
+		border: 1px solid <?php echo $btn_border_color; ?>;
+	}
+</style>
 <?php if ($modal_framework == 'bootstrap') : ?>
 	<!-- Template Default bootstrap -->
-	<div class="jb cookie <?php echo $position; ?> <?php echo $color_background; ?> <?php echo $color_links; ?> <?php echo $moduleclass_sfx; ?>">
-	    
+	<div class="jb cookie <?php echo $position; ?> color  <?php echo $moduleclass_sfx; ?>">
+	   
 		<!-- BG color -->
-		<div class="jb cookie-bg <?php echo $color_background; ?>"></div>
+		<div class="jb cookie-bg bgcolor"></div>
 	    
 		<h2><?php echo $title; ?></h2>
 	     
-		<p><?php echo $text; ?>
+		<p class="jb color"><?php echo $text; ?>
 			<?php if($show_info) : ?>
 				<?php if($aLink) : ?>
 					<a href="<?php echo $item->readmore_link; ?>"><?php echo $aliasLink; ?></a>
@@ -32,7 +66,7 @@ defined('_JEXEC') or die;
 			<?php endif; ?>
 		</p>
 	    
-		<div class="btn btn-primary jb accept <?php echo $color_links; ?>"><?php echo $aliasButton; ?></div>
+		<div class="jb accept"><?php echo $aliasButton; ?></div>
 	    
 	</div>
 	
@@ -54,10 +88,10 @@ defined('_JEXEC') or die;
 
 <?php else : ?>
 	<!-- Template Default uikit -->
-	<div class="jb cookie <?php echo $position; ?> <?php echo $color_background; ?> <?php echo $color_links; ?> <?php echo $moduleclass_sfx; ?>">
+	<div class="jb cookie <?php echo $position; ?> color <?php echo $moduleclass_sfx; ?>">
 	    
 		<!-- BG color -->
-		<div class="jb cookie-bg <?php echo $color_background; ?>"></div>
+		<div class="jb cookie-bg bgcolor"></div>
 	    
 		<h2><?php echo $title; ?></h2>
 	     
@@ -72,7 +106,7 @@ defined('_JEXEC') or die;
 			<?php endif; ?>
 		</p>
 	    
-		<div class="uk-button uk-button-success jb accept <?php echo $color_links; ?>"><?php echo $aliasButton; ?></div>
+		<div class="jb accept"><?php echo $aliasButton; ?></div>
 	</div>
 	
 	<?php if($show_info and !$aLink) : ?>

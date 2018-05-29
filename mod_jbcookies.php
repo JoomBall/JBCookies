@@ -5,7 +5,7 @@
  * 
  * @author			JoomBall! Project
  * @link			http://www.joomball.com
- * @copyright		Copyright © 2011-2014 JoomBall! Project. All Rights Reserved.
+ * @copyright		Copyright © 2011-2018 JoomBall! Project. All Rights Reserved.
  * @license			GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html
  */
 
@@ -20,8 +20,22 @@ else :
 	// --> Afegeixo un arxiu d'estil
 	JHTML::stylesheet('modules/mod_jbcookies/assets/css/jbcookies.css');
 	
-	$color_background = $params->get('color_background', 'black');
-	$color_links = $params->get('color_links', 'blue');
+	if ($params->get('color_option', 'selectable') == 'selectable') :
+		$color_background = $params->get('color_background', 'black');
+		$color_links = $params->get('color_links', 'blue');
+	else :
+		$params->set('layout', 'custom');
+		$color_background = $params->get('color_background_custom', '#000000');
+		$color_links = $params->get('color_links_custom', '#37a4fc');
+		$color_text = $params->get('color_text_custom', '#ffffff');
+		$btn_border_color = $params->get('btn_border_color_custom', '#024175');
+		$btn_text_color = $params->get('btn_text_color_custom', '#ffffff');
+		$btn_start_color = $params->get('btn_start_bgcolor_custom', '#37a4fc');
+		$btn_end_color = $params->get('btn_end_bgcolor_custom', '#025fab');
+		$btn_width = $params->get('btn_width_custom', '100px');
+		$btn_height = $params->get('btn_height_custom', '30px');
+	endif;
+	
 	$position = $params->get('position', 'bottom');
 	$show_info = $params->get('show_info', 1);
 	$modal_framework = $params->get('modal', 'bootstrap');
@@ -133,7 +147,7 @@ else :
 //	print_r($item);
 //echo '</pre>';
 	
-	require JModuleHelper::getLayoutPath('mod_jbcookies',$params->get('layout', 'default'));
+	require JModuleHelper::getLayoutPath('mod_jbcookies', $params->get('layout', 'default'));
 	
 	if(isset($_POST['set_cookie'])):
 		if($_POST['set_cookie']==1)

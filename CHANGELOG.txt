@@ -1,6 +1,12 @@
+JBCookies 3.0.8 (29-05-2018)
+================================================================================
+~ Modify links buttons in backend.
++ Add more parameters options.
+
 JBCookies 3.0.7 (18-05-2018)
 ================================================================================
-+ Add German by Martin Leibetseder
++ Add German by Martin Leibetseder.
++ Add new update extension.
 
 JBCookies 3.0.6 (08-06-2015)
 ================================================================================

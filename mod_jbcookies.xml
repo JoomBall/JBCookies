@@ -10,9 +10,9 @@
 	<creationDate>August 2014</creationDate>
 	<authorEmail>info@joomball.com</authorEmail>
 	<authorUrl>http://www.joomball.com</authorUrl>
-	<copyright>Copyright © 2011-2015 JoomBall! Project - All Rights Reserved</copyright>
+	<copyright>Copyright © 2011-2018 JoomBall! Project - All Rights Reserved</copyright>
 	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<version>3.0.7</version>
+	<version>3.0.8</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
 	
 	<files>
@@ -34,10 +34,10 @@
 				<field
 					name="header_butttons"
 					type="jbbuttons"
-					url_site_joomball="http://www.joomball.com"
-					url_site_joomball_download="http://www.joomball.com/en/products/jbcookies"
-					url_site_joomball_demo="http://www.joomball.com/en/products/jbcookies"
-					url_site_joomla_extensions="http://extensions.joomla.org/extensions/site-management/cookie-control/27911" />
+					url_site_joomball="https://www.joomball.com"
+					url_site_joomball_download="https://github.com/JoomBall/JBCookies/releases"
+					url_site_joomball_demo="https://www.joomball.com/extensiones/jbcookies"
+					url_site_joomla_extensions="https://extensions.joomla.org/extensions/extension/site-management/cookie-control/joomball-cookies/" />
 				
 				<field
 					name="note_vote_msg"
@@ -64,12 +64,25 @@
 					<option value="bottom">JGLOBAL_DOWN</option>
 				</field>
 				
+				<field
+                    name="color_option"
+                    type="radio"
+					default="selectable"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_GLOBAL_COLORS"
+                    description="" >
+                    
+                    <option value="selectable">MOD_JBCOOKIES_GLOBAL_SELECTABLE</option>
+					<option value="customized">MOD_JBCOOKIES_GLOBAL_CUSTOMIZED</option>
+                </field>
+				
                 <field
                     name="color_background"
                     type="list"
                     default="black"
                     label="MOD_JBCOOKIES_FIELD_COLOR_BACKGROUND"
-                    description="COM_MODULES_FIELD_MODULE_STYLE_DESC" >
+                    description=""
+                    showon="color_option:selectable" >
                     
                     <option value="white">MOD_JBCOOKIES_GLOBAL_WHITE</option>
                     <option value="black">MOD_JBCOOKIES_GLOBAL_BLACK</option>
@@ -80,13 +93,92 @@
                     type="list"
                     default="blue"
                     label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
-                    description="COM_MODULES_FIELD_MODULE_STYLE_DESC" >
+                    description=""
+                    showon="color_option:selectable" >
                     
                     <option value="blue">MOD_JBCOOKIES_GLOBAL_BLUE</option>
                     <option value="green">MOD_JBCOOKIES_GLOBAL_GREEN</option>
                     <option value="orange">MOD_JBCOOKIES_GLOBAL_ORANGE</option>
                     <option value="red">MOD_JBCOOKIES_GLOBAL_RED</option>
                 </field>
+                
+                <field
+                    name="color_background_custom"
+                    type="color"
+                    default="#000000"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_BACKGROUND"
+                    description=""
+                    showon="color_option:customized" />
+                
+                <field
+                    name="color_text_custom"
+                    type="color"
+                    default="#ffffff"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_TEXT_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+				
+				<field
+                    name="color_links_custom"
+                    type="color"
+                    default="#37a4fc"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
+                    description=""
+                    showon="color_option:customized" />
+				
+				 <field
+                    name="btn_start_bgcolor_custom"
+                    type="color"
+                    default="#37a4fc"
+                    label="MOD_JBCOOKIES_FIELD_BTN_START_BGCOLOR_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+				
+				 <field
+                    name="btn_end_bgcolor_custom"
+                    type="color"
+                    default="#025fab"
+                    label="MOD_JBCOOKIES_FIELD_BTN_END_BGCOLOR_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+                    
+				<field
+                    name="btn_border_color_custom"
+                    type="color"
+                    default="#024175"
+                    label="MOD_JBCOOKIES_FIELD_BTN_BORDER_COLOR_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+                    
+				 <field
+                    name="btn_text_color_custom"
+                    type="color"
+                    default="#ffffff"
+                    label="MOD_JBCOOKIES_FIELD_BTN_TEXT_COLOR_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+                    
+				<field
+                    name="btn_width_custom"
+                    type="text"
+                    default="100px"
+                    label="MOD_JBCOOKIES_FIELD_BTN_WIDTH_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+                    
+				<field
+                    name="btn_height_custom"
+                    type="text"
+                    default="30px"
+                    label="MOD_JBCOOKIES_FIELD_BTN_HEIGHT_LABEL"
+                    description=""
+                    showon="color_option:customized" />
+                
+                 <field
+                    name="color_spacer"
+                    type="spacer"
+					hr="true" >
+				</field>	
                 
                 <field
                     name="show_info"
