@@ -6,18 +6,17 @@ JBCookies displays information about the use of cookies. The module is ready to 
 <p><strong>Package:</strong>&nbsp; <img src="http://www.joomball.com/images/template/ext_mod.png" alt="Module"> <em><br></em></p>
 <p><strong>Compatibility:</strong> <em><img src="http://www.joomball.com/images/template/extension/icon/compat_30.png" alt="Joomla"></em></p>
 <p><strong>License:</strong> <em>Non-Commercial</em></p>
-<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE)</em></p>
+<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE), Dutch (nl-NL), Polish (pl-PL), Portuguese (pt-PT), Swedish (sv-SE)</em></p>
 
 <h3>Requirements for installation</h3>
 <ul>
 <li>Version of Joomla 3</li>
-<li>Bootstrap 2.3.2 (Default version of the core Joomla) or Uikit (In your template)</li>
+<li>Bootstrap 2.3.2 or 3.x (Default version of the core Joomla or your template) or Uikit (In your template)</li>
 <li>Template for Bootstrap, for example Protostar</li>
 </ul>
 <h3>After the installation</h3>
 <ul>
-<li>Choose a position used in the template. Por example `debug´.</li>
-<li>Change "Show Title" setting for "Hide".</li>
+<li>Choose a position used in the template.</li>
 <li>Check the tab languages.</li>
 </ul>
 
