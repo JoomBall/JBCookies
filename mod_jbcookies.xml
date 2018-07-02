@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension
-	type="module"
-	version="3.0"
-	client="site"
-	method="upgrade">
+<extension type="module" version="3.0" client="site" method="upgrade">
 	
 	<name>mod_jbcookies</name>
 	<author>JoomBall! Project</author>
@@ -12,10 +8,14 @@
 	<authorUrl>http://www.joomball.com</authorUrl>
 	<copyright>Copyright © 2011-2018 JoomBall! Project - All Rights Reserved</copyright>
 	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<version>3.0.8</version>
+	<version>3.0.9</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
 	
-	<files>
+	<media destination="joomball" folder="media">
+        <folder>assets</folder>
+    </media>
+	    
+    <files>
 		<filename module="mod_jbcookies">mod_jbcookies.php</filename>
 		<filename>CHANGELOG.txt</filename>
 		<filename>index.html</filename>
@@ -160,21 +160,21 @@
                     
 				<field
                     name="btn_width_custom"
-                    type="text"
-                    default="100px"
+                    type="number"
+                    hint="100"
                     label="MOD_JBCOOKIES_FIELD_BTN_WIDTH_LABEL"
                     description=""
                     showon="color_option:customized" />
                     
 				<field
                     name="btn_height_custom"
-                    type="text"
-                    default="30px"
+                    type="number"
+                    hint="30"
                     label="MOD_JBCOOKIES_FIELD_BTN_HEIGHT_LABEL"
                     description=""
                     showon="color_option:customized" />
                 
-                 <field
+                <field
                     name="color_spacer"
                     type="spacer"
 					hr="true" >
@@ -193,19 +193,6 @@
                 </field>
                 
                 <field
-                    name="modal"
-                    type="radio"
-					default="bootstrap"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_FRAMEWORK_LABEL"
-                    description="MOD_JBCOOKIES_FIELD_FRAMEWORK_DESC"
-                    showon="show_info:1" >
-                    
-                    <option value="bootstrap">Bootstrap</option>
-					<option value="uikit">Uikit</option>
-                </field>
-                
-                <field
                     name="show_article_modal"
                     type="radio"
 					default="1"
@@ -218,6 +205,78 @@
 					<option value="1">JYES</option>
                 </field>
                 
+                <field
+                    name="modal"
+                    type="radio"
+					default="bootstrap"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_FRAMEWORK_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_FRAMEWORK_DESC"
+                    showon="show_info:1[AND]show_article_modal:1" >
+                    
+                    <option value="bootstrap">Bootstrap</option>
+					<option value="uikit">Uikit</option>
+                </field>
+                
+                 <field
+                    name="bootstrap_version"
+                    type="radio"
+					default="2"
+					class="btn-group btn-group-yesno"
+                    label="JVERSION"
+                    description=""
+                    showon="show_info:1[AND]show_article_modal:1[AND]modal:bootstrap" >
+                    
+                    <option value="2">2</option>
+					<option value="3">3-4</option>
+                </field>
+                
+                <field
+                    name="options_spacer"
+                    type="spacer"
+					hr="true" >
+				</field>
+				
+				<field
+                    name="duration_cookie_days"
+                    type="number"
+                    hint="90"
+                    label="MOD_JBCOOKIES_FIELD_DURATION_COOKIE_DAYS_LABEL"
+                    description="" />
+                
+                <field
+                    name="show_decline"
+                    type="radio"
+					default="1"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_DESC" >
+                    
+                    <option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+                </field>
+                
+                <field
+                    name="show_decline_description"
+                    type="radio"
+					default="1"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_DESCRIPTION_LABEL"
+                    description=""
+                    showon="show_decline:1" >
+                    
+                    <option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+                </field>
+                
+                <field
+                    name="decline_btn_link_color"
+                    type="color"
+                    default="#37a4fc"
+                    label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
+                    description=""
+                    showon="show_decline:1" />
+                    
 			</fieldset>
 			
 			<fieldset name="languages" label="MOD_JBCOOKIES_LANGUAGES_FIELDSET_LABEL">
@@ -247,30 +306,24 @@
 				<field
 					name="cache"
 					type="list"
-					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
-					description="COM_MODULES_FIELD_CACHING_DESC">
-					<option
-						value="1">JGLOBAL_USE_GLOBAL</option>
-					<option
-						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+					description="COM_MODULES_FIELD_CACHING_DESC"
+					default="0"
+					>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
-				
-				<field
-					name="cache_time"
-					type="text"
-					default="900"
-					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-		
+			
 			</fieldset>
 			
 		</fields>
 	</config>
 	
+	<!-- Installation / uninstallation script file -->
+	<scriptfile>script.install.php</scriptfile>
+	
 	<!-- Update servers -->
 	<updateservers>
-		<server type="extension" priority="1" element="mod_jbcookies" name="JBCookies">http://www.joomball.com/images/updates/jbcookies.xml</server>
+		<server type="extension" priority="1" element="mod_jbcookies" name="JBCookies">http://www.joomball.com/images/updates/mod_jbcookies.xml</server>
 	</updateservers>
 	
 </extension>

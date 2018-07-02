@@ -39,6 +39,7 @@ class JFormFieldJBLanguages extends JFormField {
 		$hintText			= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_TEXT') . '"';
 		$hintHeader			= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_HEADER') . '"';
 		$hintBody			= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_BODY') . '"';
+		$hintDecline		= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_DECLINE') . '"';
 		$hintAliasButton	= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_ALIAS_BUTTON') . '"';
 		$hintAliasLink		= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_ALIAS_LINK') . '"';
 		$hintAlink			= ' placeholder="' . JText::_('MOD_JBCOOKIES_LANG_ALINK') . '"';		
@@ -196,12 +197,6 @@ class JFormFieldJBLanguages extends JFormField {
 							. htmlspecialchars($params[$lang['tag']]['text'], ENT_COMPAT, 'UTF-8') . '</textarea>';
 						$html .= '</div>';
 					$html .= '</div>';
-					// Header Modal
-					$html .= '<div class="span3">';
-						$html .= '<div class="control-group">';
-							$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][header]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['header'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintHeader . ' >';
-						$html .= '</div>';
-					$html .= '</div>';
 					// Body Modal
 					$html .= '<div class="span3">';
 						$html .= '<div class="control-group">';
@@ -209,11 +204,15 @@ class JFormFieldJBLanguages extends JFormField {
 							. htmlspecialchars($params[$lang['tag']]['body'], ENT_COMPAT, 'UTF-8') . '</textarea>';
 						$html .= '</div>';
 					$html .= '</div>';
-					
+					// Decline
+					$html .= '<div class="span3">';
+						$html .= '<div class="control-group">';
+							$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][text_decline]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintDecline . ' >'
+							. htmlspecialchars($params[$lang['tag']]['text_decline'], ENT_COMPAT, 'UTF-8') . '</textarea>';
+						$html .= '</div>';
+					$html .= '</div>';
 				$html .= '</div>';
-				
 			$html .= '</div>';
-			
 			$html .= '<div class="row-fluid">';
 			
 				// Alias Button
@@ -228,6 +227,12 @@ class JFormFieldJBLanguages extends JFormField {
 						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][alias_link]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['alias_link'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintAliasLink . ' >';
 					$html .= '</div>';
 				$html .= '</div>';
+				// Header Modal
+				$html .= '<div class="span3">';
+					$html .= '<div class="control-group">';
+						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][header]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['header'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintHeader . ' >';
+					$html .= '</div>';
+				$html .= '</div>';
 				// Article Link
 				$html .= '<div class="span3">';
 					$html .= '<div class="control-group">';
@@ -238,15 +243,11 @@ class JFormFieldJBLanguages extends JFormField {
 				
 						// Clear article button
 						$article[] = '<button id="' . $this->id . $aLink . '_clear" class="btn' . ($value ? '' : ' hidden') . '" onclick="return jClearArticle(\'' . $this->id . $aLink . '\')"><span class="icon-remove"></span> ' . JText::_('JCLEAR') . '</button>';
-				
 						$article[] = '</span>';
-				
 						$article[] = '<input type="hidden" id="' . $this->id . $aLink . '_id"' . ' name="' . $this->name . '['.$lang['tag'].'][alink]' . '" value="' . $value . '" />';
-				
 						$html .= implode("\n", $article);
 					$html .= '</div>';
 				$html .= '</div>';
-				
 			$html .= '</div>';
 			
 			$html .= '<hr>';

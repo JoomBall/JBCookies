@@ -1,3 +1,24 @@
+JBCookies 3.0.9 (01-07-2018)
+================================================================================
++ Add option parameter duration cookie.
++ Add option parameter for Bootstrap 2-3.
++ Add option parameter for decline cookies.
++ Add template custom.
++ Add template decline.
++ Add more languages.
++ Add media language install.
++ Add script.install.
+
+Languages:  English (en-GB),
+			Spanish (es-ES),
+			Catalan (ca-ES),
+			Italian (it-IT),
+			German (de-DE), Alemany
+			Dutch (nl-NL), Holandes
+			Polish (pl-PL), Polac
+			Portuguese (pt-PT), Portugues
+			Swedish (sv-SE), Sueco
+
 JBCookies 3.0.8 (29-05-2018)
 ================================================================================
 ~ Modify links buttons in backend.

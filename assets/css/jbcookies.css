@@ -156,6 +156,6 @@
 }
 
 /* MODAL */
-#jbcookies .modal-body {
-	max-height: 400px !important;
+#jbcookies {
+	color: #333;
 }

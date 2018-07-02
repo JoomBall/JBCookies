@@ -11,20 +11,48 @@
 
 defined('_JEXEC') or die;
 
-if (isset($_COOKIE['jbcookies'])) :
-	return ;
-else :
+if (!empty($_COOKIE['jbcookies'])) : ?>
+	<?php if (!$params->get('show_decline', 1)) { return; } ?>
+	<?php
+	$lang				= JFactory::getLanguage();
+	$currentLang		= $lang->getTag();
+	$langs				= $params->get('lang');
+	$text_decline		= !empty($langs->$currentLang->text_decline) ? $langs->$currentLang->text_decline : JText::_('MOD_JBCOOKIES_LANG_TITLE_DEFAULT');
+	$aliasButton_decline= !empty($langs->$currentLang->alias_button_decline) ? $langs->$currentLang->alias_button_decline : JText::_('MOD_JBCOOKIES_GLOBAL_DECLINE');
+	$color_links_decline= $params->get('decline_btn_link_color', '#37a4fc');
+	$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx'));
+	
+	$params->set('view', 'default_decline'); // Modify view
+	require JModuleHelper::getLayoutPath('mod_jbcookies', 'default'); ?>
+	<?php JHtml::_('jquery.framework'); ?>
+	<script type="text/javascript">
+		jQuery(document).ready(function () {
+			function setCookie(c_name,value,exdays)
+			{
+				var exdate=new Date();
+				exdate.setDate(exdate.getDate() + exdays);
+				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()) + "; path=/";
+				document.cookie=c_name + "=" + c_value;
+			}
+			jQuery('.jb.decline').click(function(){
+				setCookie("jbcookies","",0);
+				window.location.reload();
+			});
+		});
+	</script>
+<?php else :
 	// Include jQuery
 	JHtml::_('jquery.framework');
-	
+
 	// --> Afegeixo un arxiu d'estil
-	JHTML::stylesheet('modules/mod_jbcookies/assets/css/jbcookies.css');
+	JHtml::_('stylesheet', 'modules/mod_jbcookies/assets/css/jbcookies.css', array('version' => 'auto'));
 	
 	if ($params->get('color_option', 'selectable') == 'selectable') :
 		$color_background = $params->get('color_background', 'black');
 		$color_links = $params->get('color_links', 'blue');
 	else :
-		$params->set('layout', 'custom');
+		$params->set('view', 'default_custom'); // Modify view
+	
 		$color_background = $params->get('color_background_custom', '#000000');
 		$color_links = $params->get('color_links_custom', '#37a4fc');
 		$color_text = $params->get('color_text_custom', '#ffffff');
@@ -32,13 +60,14 @@ else :
 		$btn_text_color = $params->get('btn_text_color_custom', '#ffffff');
 		$btn_start_color = $params->get('btn_start_bgcolor_custom', '#37a4fc');
 		$btn_end_color = $params->get('btn_end_bgcolor_custom', '#025fab');
-		$btn_width = $params->get('btn_width_custom', '100px');
-		$btn_height = $params->get('btn_height_custom', '30px');
+		$btn_width = (int) $params->get('btn_width_custom', '100');
+		$btn_height = (int) $params->get('btn_height_custom', '30');
 	endif;
 	
 	$position = $params->get('position', 'bottom');
 	$show_info = $params->get('show_info', 1);
 	$modal_framework = $params->get('modal', 'bootstrap');
+	$framework_version = ($params->get('bootstrap_version', 2) == 2) ? 0 : 1;
 	$show_article_modal = $params->get('show_article_modal', 1);
 	$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx'));
 	
@@ -53,22 +82,24 @@ else :
 	$aliasButton	= $langs->$currentLang->alias_button ? $langs->$currentLang->alias_button : JText::_('MOD_JBCOOKIES_GLOBAL_ACCEPT');
 	$aliasLink		= $langs->$currentLang->alias_link ? $langs->$currentLang->alias_link : JText::_('MOD_JBCOOKIES_GLOBAL_MORE_INFO');
 	$aLink			= $langs->$currentLang->alink;
-
-	if ($aLink) {
+	$text_decline		= !empty($langs->$currentLang->text_decline) ? $langs->$currentLang->text_decline : JText::_('MOD_JBCOOKIES_LANG_TITLE_DEFAULT');
+	$aliasButton_decline= !empty($langs->$currentLang->alias_button_decline) ? $langs->$currentLang->alias_button_decline : JText::_('MOD_JBCOOKIES_GLOBAL_DECLINE');
+	$color_links_decline= $params->get('decline_btn_link_color', '#37a4fc');
+	
+	if ($show_info && $aLink) {
 		if ($show_article_modal) {
 			// Join Model
 			JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_content/models', 'ContentModel');
 		
 			// Get an instance of the generic articles model
 			$model = JModelLegacy::getInstance('Article', 'ContentModel', array('ignore_request' => true));
-	
 			$model->setState('filter.published', 1);
 			
 			$app = JFactory::getApplication('site');
 	
 			// Load the parameters.
-			$params = $app->getParams();
-			$model->setState('params', $params);
+			$paramsApp = $app->getParams();
+			$model->setState('params', $paramsApp);
 	
 			// Filter by id
 			$model->setState('article.id', (int) $aLink);
@@ -94,7 +125,7 @@ else :
 			$header = $item->title;
 			$body = $item->text;
 			
-			if ($modal_framework == 'bootstrap') {
+			if ($modal_framework == 'bootstrap' && !$framework_version) { // Bootstrap 2.3.2
 				// Load the modal behavior script.
 				JHtml::_('behavior.modal', 'a.jbcookies');
 			}
@@ -131,32 +162,20 @@ else :
 		
 			require_once JPATH_BASE.'/components/com_content/helpers/route.php';
 			
-			// TODO: Change based on shownoauth
 			$item->readmore_link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 		}
 	} else {
-		if ($modal_framework == 'bootstrap') {
+		if ($modal_framework == 'bootstrap' && !$framework_version) { // Bootstrap 2.3.2
 			// Load the modal behavior script.
 			JHtml::_('behavior.modal', 'a.jbcookies');
 		}
 	}
 	
-	
-	
-//echo '<pre>';
-//	print_r($item);
-//echo '</pre>';
-	
 	require JModuleHelper::getLayoutPath('mod_jbcookies', $params->get('layout', 'default'));
-	
-	if(isset($_POST['set_cookie'])):
-		if($_POST['set_cookie']==1)
-			setcookie("jbcookies", "yes", time()+3600*24*365, "/");
-	endif; ?>
+?>
 	
 	<script type="text/javascript">
 	    jQuery(document).ready(function () { 
-		
 			function setCookie(c_name,value,exdays)
 			{
 				var exdate=new Date();
@@ -179,17 +198,19 @@ else :
 			var $jb_cookie = jQuery('.jb.cookie');
 			var $jb_infoaccept = jQuery('.jb.accept');
 			var jbcookies = readCookie('jbcookies');
-	
 			if(!(jbcookies == "yes")){
-			
 				$jb_cookie.delay(1000).slideDown('fast'); 
-	
 				$jb_infoaccept.click(function(){
-					setCookie("jbcookies","yes",365);
-					jQuery.post('<?php echo JURI::current(); ?>', 'set_cookie=1', function(){});
+					setCookie("jbcookies","yes",<?php echo $params->get('expire', 1); ?>);
 					$jb_cookie.slideUp('slow');
+					jQuery('.jb.cookie-decline').fadeIn('slow', function() {});
 				});
-			} 
+			}
+
+			jQuery('.jb.decline').click(function(){
+				setCookie("jbcookies","",0);
+				window.location.reload();
+			});
 	    });
 	</script>
 
