@@ -11,7 +11,7 @@
 	<version>3.0.9</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
 	
-	<media destination="joomball" folder="media">
+	<media folder="media" destination="joomball">
         <folder>assets</folder>
     </media>
 	    
