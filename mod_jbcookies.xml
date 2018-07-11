@@ -241,6 +241,7 @@
                     name="duration_cookie_days"
                     type="number"
                     hint="90"
+		    default="90"
                     label="MOD_JBCOOKIES_FIELD_DURATION_COOKIE_DAYS_LABEL"
                     description="" />
                 
