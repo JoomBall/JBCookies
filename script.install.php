@@ -11,10 +11,6 @@ class mod_jbcookiesInstallerScript {
 	
 	public function __construct()
 	{
-//		$lang = JFactory::getLanguage();
-//		$basePathLanguage = JPATH_ROOT . '/media/joomball/assets';
-//		$lang->load('install', $basePathLanguage, null, false, true)
-//			|| $lang->load('install', $basePathLanguage, $lang->getDefault(), false, true);
 	}
 	
 	function install( $parent ) {
@@ -35,6 +31,7 @@ class mod_jbcookiesInstallerScript {
 	}
  
 	function update( $parent ) {
+		// Idioma es necessari aquí
 		$lang = JFactory::getLanguage();
 		$basePathLanguage = JPATH_ROOT . '/media/joomball/assets';
 		$lang->load('install', $basePathLanguage, null, false, true)

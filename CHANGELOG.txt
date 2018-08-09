@@ -1,3 +1,8 @@
+JBCookies 3.1.0 (09-08-2018)
+================================================================================
++ Fix error in cookie duration.
++ Add Languages:  Greek (el-GR) (by Makis Chatzopoulos), French (fr-FR) (by Pascal)
+			
 JBCookies 3.0.9 (01-07-2018)
 ================================================================================
 + Add option parameter duration cookie.
