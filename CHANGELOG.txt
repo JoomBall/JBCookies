@@ -1,3 +1,7 @@
+JBCookies 3.1.1 (28-08-2018)
+================================================================================
++ Fix error in file language it-IT.mod_jbcookies.ini by micropalla (thanks).
+			
 JBCookies 3.1.0 (09-08-2018)
 ================================================================================
 + Fix error in cookie duration.

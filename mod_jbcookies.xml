@@ -8,7 +8,7 @@
 	<authorUrl>http://www.joomball.com</authorUrl>
 	<copyright>Copyright © 2011-2018 JoomBall! Project - All Rights Reserved</copyright>
 	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
 	
 	<media folder="media" destination="joomball">
