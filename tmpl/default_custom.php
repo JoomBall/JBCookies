@@ -80,7 +80,7 @@ defined('_JEXEC') or die;
 			<?php endif; ?>
 		</p>
 	    
-		<div class="jb accept"><?php echo $aliasButton; ?></div>
+	    <div class="jb accept"><?php echo $aliasButton; ?></div>
 	    
 	</div>
 	

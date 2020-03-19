@@ -1,3 +1,15 @@
+JBCookies 3.1.4 (19-03-2020)
+================================================================================
++ Add option parameter remove cache extensions.
+			
+JBCookies 3.1.3 (18-03-2020)
+================================================================================
++ Add option parameter show same subdomain.
+			
+JBCookies 3.1.2 (06-10-2018)
+================================================================================
++ Add option parameter decline icon.
+			
 JBCookies 3.1.1 (28-08-2018)
 ================================================================================
 + Fix error in file language it-IT.mod_jbcookies.ini by micropalla (thanks).

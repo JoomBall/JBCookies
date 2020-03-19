@@ -20,10 +20,8 @@ defined('_JEXEC') or die;
 </style>
 <!-- Template Decline -->
 <div class="jb cookie-decline <?php echo $moduleclass_sfx; ?>">
-	<p>
-		<?php echo $params->get('show_decline_description', 1) ? $text_decline : ''; ?>
-		<span class="btn btn-link jb decline link"><?php echo $aliasButton_decline; ?></span>
-	</p>
+	<?php echo $params->get('show_decline_description', 1) ? $text_decline : ''; ?>
+	<span class="btn btn-link jb decline link"><?php echo $aliasButton_decline; ?></span>
 </div>
 <!--googleon: all-->
 
