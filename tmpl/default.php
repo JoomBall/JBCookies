@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 	<?php endif; ?>
 	<?php if ($modal_framework == 'bootstrap') : ?>
 		<!-- Template Default bootstrap -->
-		<div class="jb cookie <?php echo $position; ?> <?php echo $color_background; ?> <?php echo $color_links; ?> <?php echo $moduleclass_sfx; ?>">
+		<div class="jb cookie <?php echo $position; ?> <?php echo $color_background; ?> <?php echo str_replace('btn-', '', $color_links) . $color_border; ?> <?php echo $moduleclass_sfx; ?>">
 		    
 			<!-- BG color -->
 			<div class="jb cookie-bg <?php echo $color_background; ?>"></div>
@@ -48,7 +48,7 @@ defined('_JEXEC') or die;
 				<?php endif; ?>
 			</p>
 		    
-			<div class="btn btn-primary jb accept <?php echo $color_links; ?>"><?php echo $aliasButton; ?></div>
+			<div class="btn jb accept <?php echo $color_links; ?>"><?php echo $aliasButton; ?></div>
 		    
 		</div>
 		
@@ -59,14 +59,19 @@ defined('_JEXEC') or die;
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title"><?php echo $header; ?></h4>
+								<?php if ($params->get('bootstrap_version', 2) == 3) : ?>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title"><?php echo $header; ?></h4>
+								<?php else : ?>
+									<h4 class="modal-title"><?php echo $header; ?></h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<?php endif; ?>
 							</div>
 							<div class="modal-body">
 								<?php echo $body; ?>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
+								<button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 							</div>
 						</div>
 					</div>

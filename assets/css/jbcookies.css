@@ -137,22 +137,26 @@
 .jb.accept.blue {
 	background: #0089f2;
 	border: 1px solid #0654b3;
+	color: #ffffff;
 }
 
 .jb.accept.green {
 	background: #52a552;
 	border: 1px solid #008000;
+	color: #ffffff;
 }
 
 .jb.accept.orange {
 	background: #e88a05;
 	border: 1px solid #8a5203;
+	color: #ffffff;
 }
 
 .jb.accept.red {
 	background: #dd2f26;
 	border: 1px solid #9c0404;
 	padding: 4px 12px;
+	color: #ffffff;
 }
 
 /* MODAL */

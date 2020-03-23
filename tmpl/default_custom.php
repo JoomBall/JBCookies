@@ -91,14 +91,19 @@ defined('_JEXEC') or die;
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title"><?php echo $header; ?></h4>
+							<?php if ($params->get('bootstrap_version', 2) == 3) : ?>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><?php echo $header; ?></h4>
+							<?php else : ?>
+								<h4 class="modal-title"><?php echo $header; ?></h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<?php endif; ?>
 						</div>
 						<div class="modal-body">
 							<?php echo $body; ?>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
+							<button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 						</div>
 					</div>
 				</div>

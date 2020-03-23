@@ -1,3 +1,8 @@
+JBCookies 3.1.5 (23-03-2020)
+================================================================================
++ Add option parameter bootstrap 4 for modal.
++ Add more options parameters in background colors and link colors.
+			
 JBCookies 3.1.4 (19-03-2020)
 ================================================================================
 + Add option parameter remove cache extensions.
