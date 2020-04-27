@@ -44,7 +44,7 @@ class mod_jbcookiesInstallerScript {
 		// Installing component manifest file version
 		$this->release = $parent->get( "manifest" )->version;
 		
-		if ($this->release <= '3.0.9') {
+		if ($this->release <= '3.1.0') {
 			$pathSite = JPATH_SITE.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR.'mod_jbcookies';
 				
 			// Eliminem Arxius innecesaris

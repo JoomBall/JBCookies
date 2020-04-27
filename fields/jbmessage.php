@@ -52,7 +52,7 @@ class JFormFieldJbmessage extends JFormField {
 					}
 				}
 		
-				if (!$version) {
+				if (empty($version)) {
 					return '';
 				}
 				

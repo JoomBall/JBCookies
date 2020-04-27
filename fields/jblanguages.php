@@ -87,6 +87,7 @@ class JFormFieldJBLanguages extends JFormField {
 				$params[$lang['tag']]['text']			= '';
 				$params[$lang['tag']]['header']			= '';
 				$params[$lang['tag']]['body']			= '';
+				$params[$lang['tag']]['text_decline']	= '';
 				$params[$lang['tag']]['alias_button']	= '';
 				$params[$lang['tag']]['alias_link']		= '';
 				$params[$lang['tag']]['alink']			= '';

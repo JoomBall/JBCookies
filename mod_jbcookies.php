@@ -11,6 +11,19 @@
 
 defined('_JEXEC') or die;
 
+$domain = str_replace(array('https://www.', 'http://www.', 'https://', 'http://'), '', JUri::base());
+
+if ((strpos($domain, '/') !== false) || (strstr($domain, 'localhost', true) !== false)) :
+	$domain = '';
+
+//	echo $domain = strstr($domain, '/', true);
+elseif ($params->get('subdomain_alias', 0) && count(explode('.', $domain)) > 1) :
+	$parts = explode('.', $domain);
+	$domain = $parts[count($parts) - 2] . '.' . $parts[count($parts) - 1];
+else :
+	$domain = '';
+endif;
+
 if (!empty($_COOKIE['jbcookies'])) : ?>
 	<?php if (!$params->get('show_decline', 1)) { return; } ?>
 	<?php
@@ -19,6 +32,7 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	$langs				= $params->get('lang');
 	$text_decline		= !empty($langs->$currentLang->text_decline) ? $langs->$currentLang->text_decline : JText::_('MOD_JBCOOKIES_LANG_TITLE_DEFAULT');
 	$aliasButton_decline= !empty($langs->$currentLang->alias_button_decline) ? $langs->$currentLang->alias_button_decline : JText::_('MOD_JBCOOKIES_GLOBAL_DECLINE');
+	$aliasButton_decline= $params->get('decline_icon', '') ? '<i class="hasTooltip '.$params->get('decline_icon', '').'" title="'.$aliasButton_decline.'"></i>': $aliasButton_decline;
 	$color_links_decline= $params->get('decline_btn_link_color', '#37a4fc');
 	$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx'));
 	
@@ -26,17 +40,28 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	require JModuleHelper::getLayoutPath('mod_jbcookies', 'default'); ?>
 	<?php JHtml::_('jquery.framework'); ?>
 	<script type="text/javascript">
+		var url = '<?php echo JUri::root(); ?>';
+		
 		jQuery(document).ready(function () {
-			function setCookie(c_name,value,exdays)
+			function setCookie(c_name,value,exdays,domain)
 			{
+				if (domain) {domain = '; domain=' + domain}
 				var exdate=new Date();
 				exdate.setDate(exdate.getDate() + exdays);
-				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()) + "; path=/";
+				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()) + "; path=/" + domain;
+
 				document.cookie=c_name + "=" + c_value;
 			}
 			jQuery('.jb.decline').click(function(){
-				setCookie("jbcookies","",0);
-				window.location.reload();
+				setCookie("jbcookies","",0,"<?php echo $domain; ?>");
+				<?php if ($params->get('cache_extensions', '')) : ?>
+					var extensions = '<?php echo $params->get('cache_extensions', ''); ?>';
+					jQuery.post(url + 'index.php?option=com_ajax&module=jbcookies&format=raw', {extensions: extensions}, function() {
+						window.location.reload();
+					});
+				<?php else : ?>
+					window.location.reload();
+				<?php endif; ?>
 			});
 		});
 	</script>
@@ -70,6 +95,7 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	$framework_version = ($params->get('bootstrap_version', 2) == 2) ? 0 : 1;
 	$show_article_modal = $params->get('show_article_modal', 1);
 	$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx'));
+	$color_border = (strpos($color_links, 'btn-') !== false) ? ' border-' . ($position == 'top' ? 'bottom' : 'top') . ' border-' . str_replace('btn-', '', $color_links) : '';
 	
 	$lang = JFactory::getLanguage();
 	$currentLang = $lang->getTag();
@@ -84,6 +110,7 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	$aLink			= $langs->$currentLang->alink;
 	$text_decline		= !empty($langs->$currentLang->text_decline) ? $langs->$currentLang->text_decline : JText::_('MOD_JBCOOKIES_LANG_TITLE_DEFAULT');
 	$aliasButton_decline= !empty($langs->$currentLang->alias_button_decline) ? $langs->$currentLang->alias_button_decline : JText::_('MOD_JBCOOKIES_GLOBAL_DECLINE');
+	$aliasButton_decline= $params->get('decline_icon', '') ? '<i class="hasTooltip '.$params->get('decline_icon', '').'" title="'.$aliasButton_decline.'"></i>': $aliasButton_decline;
 	$color_links_decline= $params->get('decline_btn_link_color', '#37a4fc');
 	
 	if ($show_info && $aLink) {
@@ -106,8 +133,17 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	
 			// Retrieve Content
 			$item = $model->getItem();
+
+			if (!empty($item->params) && is_object($item->params)) {
+				$showInfo = ($item->params->get('show_intro', '1') == '1') ? 1 : 0;
+			} else {
+				$paramsContent = JComponentHelper::getParams('com_content');
+				$showInfo = ($paramsContent->get('show_intro', '1') == '1') ? 1 : 0;
+			}
 			
-			if ($item->params->get('show_intro', '1') == '1')
+//			echo '<pre>'; echo print_r($paramsContent); echo '</pre>'; exit;
+			
+			if ($showInfo)
 			{
 				$item->text = $item->introtext . ' ' . $item->fulltext;
 			}
@@ -173,14 +209,17 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 	
 	require JModuleHelper::getLayoutPath('mod_jbcookies', $params->get('layout', 'default'));
 ?>
-	
 	<script type="text/javascript">
 	    jQuery(document).ready(function () { 
-			function setCookie(c_name,value,exdays)
+	    	var url = '<?php echo JUri::root(); ?>';
+			
+			function setCookie(c_name,value,exdays,domain)
 			{
+				if (domain) {domain = '; domain=' + domain}
 				var exdate=new Date();
 				exdate.setDate(exdate.getDate() + exdays);
-				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()) + "; path=/";
+				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()) + "; path=/" + domain;
+
 				document.cookie=c_name + "=" + c_value;
 			}
 			
@@ -201,15 +240,27 @@ if (!empty($_COOKIE['jbcookies'])) : ?>
 			if(!(jbcookies == "yes")){
 				$jb_cookie.delay(1000).slideDown('fast'); 
 				$jb_infoaccept.click(function(){
-					setCookie("jbcookies","yes",<?php echo $params->get('duration_cookie_days', 90); ?>);
+					setCookie("jbcookies","yes",<?php echo $params->get('duration_cookie_days', 90); ?>,"<?php echo $domain; ?>");
 					$jb_cookie.slideUp('slow');
 					jQuery('.jb.cookie-decline').fadeIn('slow', function() {});
+
+					<?php if ($params->get('cache_extensions', '')) : ?>
+						var extensions = '<?php echo $params->get('cache_extensions', ''); ?>';
+						jQuery.post(url + 'index.php?option=com_ajax&module=jbcookies&format=raw', {extensions: extensions}, function() {});
+					<?php endif; ?>
 				});
 			}
 
 			jQuery('.jb.decline').click(function(){
-				setCookie("jbcookies","",0);
-				window.location.reload();
+				setCookie("jbcookies","",0,"<?php echo $domain; ?>");
+				<?php if ($params->get('cache_extensions', '')) : ?>
+					var extensions = '<?php echo $params->get('cache_extensions', ''); ?>';
+					jQuery.post(url + 'index.php?option=com_ajax&module=jbcookies&format=raw', {extensions: extensions}, function() {
+						window.location.reload();
+					});
+				<?php else : ?>
+					window.location.reload();
+				<?php endif; ?>
 			});
 	    });
 	</script>

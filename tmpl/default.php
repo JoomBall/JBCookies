@@ -52,10 +52,10 @@ defined('_JEXEC') or die;
 		    
 		</div>
 		
-		<?php if($show_info and !$aLink) : ?>
+		<?php if($show_info && !$aLink) : ?>
 		    <!-- Modal -->
 		    <?php if($framework_version) : // For Bootstrap 3-4 ?>
-				<div class="modal fade" id="jbcookies" tabindex="-1" role="dialog">
+				<div class="modal" id="jbcookies" tabindex="-1" role="dialog">
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">

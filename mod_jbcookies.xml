@@ -6,9 +6,9 @@
 	<creationDate>August 2014</creationDate>
 	<authorEmail>info@joomball.com</authorEmail>
 	<authorUrl>http://www.joomball.com</authorUrl>
-	<copyright>Copyright © 2011-2018 JoomBall! Project - All Rights Reserved</copyright>
+	<copyright>Copyright © 2014-2020 JoomBall! Project - All Rights Reserved</copyright>
 	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<version>3.1.1</version>
+	<version>3.1.6</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
 	
 	<media folder="media" destination="joomball">
@@ -18,6 +18,7 @@
     <files>
 		<filename module="mod_jbcookies">mod_jbcookies.php</filename>
 		<filename>CHANGELOG.txt</filename>
+		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_jbcookies.xml</filename>
 		
@@ -78,28 +79,55 @@
 				
                 <field
                     name="color_background"
-                    type="list"
+                    type="groupedlist"
                     default="black"
                     label="MOD_JBCOOKIES_FIELD_COLOR_BACKGROUND"
                     description=""
                     showon="color_option:selectable" >
                     
-                    <option value="white">MOD_JBCOOKIES_GLOBAL_WHITE</option>
-                    <option value="black">MOD_JBCOOKIES_GLOBAL_BLACK</option>
+                    <group label="JALL">
+						<option value="white">MOD_JBCOOKIES_GLOBAL_WHITE</option>
+						<option value="black">MOD_JBCOOKIES_GLOBAL_BLACK</option>
+                    </group>
+                    <group label="Bootstrap 3-4">
+						<option value="bg-primary">Primary</option>
+						<option value="bg-secondary">Secondary</option>
+						<option value="bg-success">Success</option>
+						<option value="bg-danger">Danger</option>
+						<option value="bg-warning">Warning</option>
+						<option value="bg-info">Info</option>
+						<option value="bg-light">Light</option>
+						<option value="bg-dark">Dark</option>
+						<option value="bg-white">White</option>
+						<option value="bg-transparent">Transparent</option>
+				    </group>
                 </field>
                 
                 <field
                     name="color_links"
-                    type="list"
+                    type="groupedlist"
                     default="blue"
                     label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
                     description=""
                     showon="color_option:selectable" >
                     
-                    <option value="blue">MOD_JBCOOKIES_GLOBAL_BLUE</option>
-                    <option value="green">MOD_JBCOOKIES_GLOBAL_GREEN</option>
-                    <option value="orange">MOD_JBCOOKIES_GLOBAL_ORANGE</option>
-                    <option value="red">MOD_JBCOOKIES_GLOBAL_RED</option>
+                    <group label="JALL">
+                    	<option value="blue">MOD_JBCOOKIES_GLOBAL_BLUE</option>
+                    	<option value="green">MOD_JBCOOKIES_GLOBAL_GREEN</option>
+                    	<option value="orange">MOD_JBCOOKIES_GLOBAL_ORANGE</option>
+                    	<option value="red">MOD_JBCOOKIES_GLOBAL_RED</option>
+                    </group>
+                    <group label="Bootstrap">
+						<option value="btn-primary">Primary</option>
+						<option value="btn-secondary">Secondary</option>
+						<option value="btn-success">Success</option>
+						<option value="btn-danger">Danger</option>
+						<option value="btn-warning">Warning</option>
+						<option value="btn-info">Info</option>
+						<option value="btn-light">Light</option>
+						<option value="btn-dark">Dark</option>
+						<option value="btn-transparent">Transparent</option>
+				    </group>
                 </field>
                 
                 <field
@@ -228,7 +256,8 @@
                     showon="show_info:1[AND]show_article_modal:1[AND]modal:bootstrap" >
                     
                     <option value="2">2</option>
-					<option value="3">3-4</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
                 </field>
                 
                 <field
@@ -238,6 +267,18 @@
 				</field>
 				
 				<field
+                    name="subdomain_alias"
+                    type="radio"
+					default="0"
+					class="btn-group btn-group-yesno"
+                    label="MOD_JBCOOKIES_FIELD_DOMAIN_ALIAS_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_DOMAIN_ALIAS_DESC" >
+                    
+                    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+                </field>
+                
+				<field
                     name="duration_cookie_days"
                     type="number"
                     hint="90"
@@ -245,6 +286,13 @@
                     description="" />
                 
                 <field
+                    name="cache_extensions"
+                    type="text"
+					hint="com_templates,mod_menu"
+					label="MOD_JBCOOKIES_FIELD_CACHE_EXTENSIONS_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_CACHE_EXTENSIONS_DESC" />   
+				
+				<field
                     name="show_decline"
                     type="radio"
 					default="1"
@@ -255,6 +303,14 @@
                     <option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
                 </field>
+                
+                <field
+                    name="decline_icon"
+                    type="text"
+					hint="icon-cookie"
+					label="MOD_JBCOOKIES_FIELD_DECLINE_ICON_LABEL"
+                    description=""
+                    showon="show_decline:1" />
                 
                 <field
                     name="show_decline_description"
@@ -276,8 +332,8 @@
                     label="MOD_JBCOOKIES_FIELD_COLOR_LINKS"
                     description=""
                     showon="show_decline:1" />
-                    
-			</fieldset>
+                 
+            </fieldset>
 			
 			<fieldset name="languages" label="MOD_JBCOOKIES_LANGUAGES_FIELDSET_LABEL">
 				
