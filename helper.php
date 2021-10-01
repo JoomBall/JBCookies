@@ -31,6 +31,10 @@ class modJBCookiesHelper
 		foreach (explode(',', $extensions) as $ext) {
 			$cache->clean($ext);
 		}
+		
+//		echo '1'; //json_encode($data);
+		
+		$app->close();
 	}
 }
 ?>

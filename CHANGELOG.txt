@@ -1,3 +1,17 @@
+JBCookies 3.1.8 (01-10-2021)
+================================================================================
+~ Bug fixe: Now the cache is activated in module.
+~ Select javascript cookie.
++ Add Bootstrap 5
+
+JBCookies 3.1.7 (02-10-2020)
+================================================================================
+~ Bug fixe: problem in cache.
+~ Change <h2> tag to <p>
+~ Change classes names
++ Add robots-noindex robots-nofollow robots-nocontent.
++ Improved decline button does not refresh page.
+
 JBCookies 3.1.6 (27-04-2020)
 ================================================================================
 ~ 2-3 bugs fixes.

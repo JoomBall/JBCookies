@@ -44,11 +44,11 @@ class mod_jbcookiesInstallerScript {
 		// Installing component manifest file version
 		$this->release = $parent->get( "manifest" )->version;
 		
-		if ($this->release <= '3.1.0') {
+		if ($this->release <= '3.1.6') {
 			$pathSite = JPATH_SITE.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR.'mod_jbcookies';
 				
 			// Eliminem Arxius innecesaris
-			$files = array($pathSite.'/tmpl/custom.php', $pathSite.'/tmpl/decline.php');
+			$files = array($pathSite.'/tmpl/custom.php', $pathSite.'/tmpl/decline.php', $pathSite.'/tmpl/default_decline.php');
 		
 			JFile::delete($files);
 		}
