@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 		color: <?php echo $color_links; ?>;
 	} 
 
-	.jb-cookie.bgcolor {
+	.jb-cookie-bg.bgcolor {
 		background: <?php echo $color_background; ?>;
 	}
 	
@@ -72,8 +72,9 @@ defined('_JEXEC') or die;
 				<?php if($aLink) : ?>
 					<a href="<?php echo $item->readmore_link; ?>"><?php echo $aliasLink; ?></a>
 				<?php else: ?>
+					<?php $toggle = ($framework_version == 5) ? 'data-bs-toggle="modal" data-bs-target="#jbcookies"' : 'data-toggle="modal" data-target="#jbcookies"'; ?>
 					<!-- Button to trigger modal -->
-					<a href="#jbcookies" data-toggle="modal" data-target="#jbcookies"><?php echo $aliasLink; ?></a>
+					<a href="#jbcookies" <?php echo $toggle; ?>><?php echo $aliasLink; ?></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		</p>

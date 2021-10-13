@@ -1,3 +1,8 @@
+JBCookies 3.1.9 (13-10-2021)
+================================================================================
+~ Bug fixe: Problem solved when show rejection parameter is not displayed.
+~ Bug fixe: It was not loading customizable template.
+
 JBCookies 3.1.8 (01-10-2021)
 ================================================================================
 ~ Bug fixe: Now the cache is activated in module.
