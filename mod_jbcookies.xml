@@ -1,35 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<extension type="module" version="3.0" client="site" method="upgrade">
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade" version="4.0.0">
 	
 	<name>mod_jbcookies</name>
 	<author>JoomBall! Project</author>
 	<creationDate>August 2014</creationDate>
 	<authorEmail>info@joomball.com</authorEmail>
 	<authorUrl>http://www.joomball.com</authorUrl>
-	<copyright>Copyright © 2014-2020 JoomBall! Project - All Rights Reserved</copyright>
+	<copyright>Copyright © 2014-2021 JoomBall! Project - All Rights Reserved</copyright>
 	<license>GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html</license>
-	<version>3.1.9</version>
+	<version>4.0.0</version>
 	<description>MOD_JBCOOKIES_XML_DESCRIPTION</description>
+	<namespace path="src">JB\Module\JBCookies</namespace>
 	
-	<media folder="media" destination="joomball">
-        <folder>assets</folder>
-    </media>
+    <media folder="media/jbmedia" destination="jbmedia">
+		<folder>css</folder>
+		<folder>language</folder>
+	</media>
 	    
     <files>
 		<filename module="mod_jbcookies">mod_jbcookies.php</filename>
 		<filename>CHANGELOG.txt</filename>
-		<filename>helper.php</filename>
-		<filename>index.html</filename>
-		<filename>mod_jbcookies.xml</filename>
 		
-		<folder>assets</folder>
-		<folder>fields</folder>
 		<folder>language</folder>
+		<folder>src</folder>
 		<folder>tmpl</folder>
 	</files>
 
 	<config>
-		<fields name="params" addfieldpath="/modules/mod_jbcookies/fields">
+		<fields name="params" addfieldprefix="JB\Module\JBCookies\Site\Field">
 			<fieldset name="basic">
 			
 				<field
@@ -58,11 +56,10 @@
 					name="position"
 					type="list"
 					default="bottom"
-					label="COM_MODULES_FIELD_POSITION_LABEL"
-					description="COM_MODULES_FIELD_POSITION_DESC" >
+					label="COM_MODULES_FIELD_POSITION_LABEL" >
 					
 					<option value="top">JGLOBAL_TOP</option>
-					<option value="bottom">JGLOBAL_DOWN</option>
+					<option value="bottom">JGLOBAL_BLOG_DOWN_OPTION</option>
 				</field>
 				
 				<field
@@ -89,7 +86,7 @@
 						<option value="white">MOD_JBCOOKIES_GLOBAL_WHITE</option>
 						<option value="black">MOD_JBCOOKIES_GLOBAL_BLACK</option>
                     </group>
-                    <group label="Bootstrap 3-4">
+                    <group label="Bootstrap 3-4-5">
 						<option value="bg-primary">Primary</option>
 						<option value="bg-secondary">Secondary</option>
 						<option value="bg-success">Success</option>
@@ -212,9 +209,10 @@
                     name="show_info"
                     type="radio"
 					default="1"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_SHOW_INFO_LABEL"
-                    description="MOD_JBCOOKIES_FIELD_SHOW_INFO_DESC" >
+					layout="joomla.form.field.radio.switcher"
+					label="MOD_JBCOOKIES_FIELD_SHOW_INFO_LABEL"
+                    description="MOD_JBCOOKIES_FIELD_SHOW_INFO_DESC"
+                    filter="integer" >
                     
                     <option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -224,10 +222,11 @@
                     name="show_article_modal"
                     type="radio"
 					default="1"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_SHOW_ATICLE_MODAL_LABEL"
+					label="MOD_JBCOOKIES_FIELD_SHOW_ATICLE_MODAL_LABEL"
                     description="MOD_JBCOOKIES_FIELD_SHOW_ATICLE_MODAL_DESC"
-                    showon="show_info:1" >
+                    layout="joomla.form.field.radio.switcher"
+					filter="integer"
+					showon="show_info:1" >
                     
                     <option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -249,13 +248,12 @@
                  <field
                     name="bootstrap_version"
                     type="radio"
-					default="2"
+					default="5"
 					class="btn-group btn-group-yesno"
                     label="JVERSION"
                     description=""
                     showon="show_info:1[AND]show_article_modal:1[AND]modal:bootstrap" >
                     
-                    <option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
@@ -271,8 +269,9 @@
                     name="subdomain_alias"
                     type="radio"
 					default="0"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_DOMAIN_ALIAS_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					filter="integer"
+					label="MOD_JBCOOKIES_FIELD_DOMAIN_ALIAS_LABEL"
                     description="MOD_JBCOOKIES_FIELD_DOMAIN_ALIAS_DESC" >
                     
                     <option value="0">JNO</option>
@@ -290,8 +289,9 @@
                     name="show_decline"
                     type="radio"
 					default="1"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					filter="integer"
+					label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_LABEL"
                     description="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_DESC" >
                     
                     <option value="0">JHIDE</option>
@@ -310,8 +310,9 @@
                     name="show_decline_description"
                     type="radio"
 					default="1"
-					class="btn-group btn-group-yesno"
-                    label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_DESCRIPTION_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					filter="integer"
+					label="MOD_JBCOOKIES_FIELD_SHOW_DECLINE_DESCRIPTION_LABEL"
                     description=""
                     showon="show_decline:1" >
                     
@@ -334,7 +335,7 @@
 				<field
 					name="lang"
 					type="jblanguages"
-					class="span12" >
+					class="form-control" >
 				</field>
                    
             </fieldset>
@@ -345,46 +346,41 @@
 					name="layout"
 					type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+					class="form-select"
+					validate="moduleLayout" />
 				
 				<field
 					name="moduleclass_sfx"
 					type="textarea" rows="3"
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+					validate="CssIdentifier" />
+					
 				<field
 					name="cache"
 					type="list"
-					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
-					description="COM_MODULES_FIELD_CACHING_DESC">
-					<option
-						value="1">JGLOBAL_USE_GLOBAL</option>
-					<option
-						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+					default="1"
+					filter="integer"
+					validate="options"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
 
 				<field
 					name="cache_time"
-					type="text"
-					default="900"
+					type="number"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-				<field
-					name="cachemode"
-					type="hidden"
-					default="static">
-					<option
-						value="static"></option>
-				</field>
-			
+					default="900"
+					filter="integer" />
+					
 			</fieldset>
 			
 		</fields>
 	</config>
 	
 	<!-- Installation / uninstallation script file -->
-	<scriptfile>script.install.php</scriptfile>
+	<scriptfile>script.php</scriptfile>
 	
 	<!-- Update servers -->
 	<updateservers>

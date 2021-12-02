@@ -10,6 +10,8 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
 ?>
 <!--googleoff: all-->
 <?php if ($params->get('show_decline', 1)) : ?>
@@ -60,7 +62,7 @@ defined('_JEXEC') or die;
 							<?php echo $body; ?>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
+							<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 						</div>
 					</div>
 				</div>
@@ -82,22 +84,9 @@ defined('_JEXEC') or die;
 							<?php echo $body; ?>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
+							<button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal"><?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 						</div>
 					</div>
-				</div>
-			</div>
-		<?php else: // For Bootstrap 2 ?>
-			<div id="jbcookies" class="modal hide fade robots-noindex robots-nofollow robots-nocontent">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3><?php echo $header; ?></h3>
-				</div>
-				<div class="modal-body">
-					<?php echo $body; ?>
-				</div>
-				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -133,7 +122,7 @@ defined('_JEXEC') or die;
 				</div>
 				<?php echo $body; ?>
 				<div class="uk-modal-footer uk-text-right">
-					<button class="uk-button uk-modal-close" type="button"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
+					<button class="uk-button uk-modal-close" type="button"><?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?></button>
 				</div>
 			</div>
 		</div>
