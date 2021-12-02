@@ -10,9 +10,9 @@ JBCookies displays information about the use of cookies for Joomla 4. The module
 
 <h3>Requirements for installation</h3>
 <ul>
-<li>Version of Joomla 3</li>
-<li>Bootstrap 2.3.2, 3.x, 4.x or 5.x (Default version of the core Joomla or your template) or Uikit (In your template)</li>
-<li>Template for Bootstrap, for example Protostar</li>
+<li>Version of Joomla 4</li>
+<li>3.x, 4.x or 5.x (Default version of the core Joomla or your template) or Uikit (In your template)</li>
+<li>Template for Bootstrap, for example Protostar, Helixultimate</li>
 <li>PHP5, PHP7</li>
 </ul>
 <h3>After the installation</h3>
