@@ -1,7 +1,14 @@
-JBCookies 4.0.0 (16-10-2021)
+JBCookies 4.0.0 (02-12-2021)
 ================================================================================
+~ Update only for Joomla 4.
 ~ Rename files.
-+ Only for joomla 4 version.
++ Add namespace.
++ Add new media/jbmedia folder.
+
+JBCookies 3.1.9 (13-10-2021)
+================================================================================
+~ Bug fixe: Problem solved when show rejection parameter is not displayed.
+~ Bug fixe: It was not loading customizable template.
 
 JBCookies 3.1.8 (01-10-2021)
 ================================================================================
