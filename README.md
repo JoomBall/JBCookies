@@ -1,5 +1,5 @@
 # JBCookies
-JBCookies displays information about the use of cookies. The module is ready to support any multilanguage page.
+JBCookies displays information about the use of cookies for Joomla 4. The module is ready to support any multilanguage page.
 
 <img src="http://www.joomball.com/images/template/toolbar/icon-256-jbcookies.png" alt="JBCookies">
 <h3>Product details</h3>
