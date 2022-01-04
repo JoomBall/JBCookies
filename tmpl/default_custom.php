@@ -19,7 +19,7 @@ use Joomla\CMS\Language\Text;
 		color: <?php echo $color_links; ?>;
 	} 
 
-	.jb-cookie.bgcolor {
+	.jb-cookie .bgcolor {
 		background: <?php echo $color_background; ?>;
 	}
 	
@@ -75,7 +75,7 @@ use Joomla\CMS\Language\Text;
 					<a href="<?php echo $item->readmore_link; ?>"><?php echo $aliasLink; ?></a>
 				<?php else: ?>
 					<!-- Button to trigger modal -->
-					<a href="#jbcookies" data-toggle="modal" data-target="#jbcookies"><?php echo $aliasLink; ?></a>
+					<a href="#jbcookies" data-bs-toggle="modal" data-bs-target="#jbcookies"><?php echo $aliasLink; ?></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		</p>

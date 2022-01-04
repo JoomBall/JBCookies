@@ -41,7 +41,7 @@ if ($params->get('color_option', 'selectable') == 'selectable') :
 	$color_background = $params->get('color_background', 'black');
 	$color_links = $params->get('color_links', 'blue');
 else :
-	$params->set('view', 'default_custom'); // Modify view
+	$params->set('layout', 'default_custom'); // Modify layout
 
 	$color_background = $params->get('color_background_custom', '#000000');
 	$color_links = $params->get('color_links_custom', '#37a4fc');
@@ -78,8 +78,7 @@ $aliasButton_decline= !empty($langs->$currentLang->alias_button_decline) ? $lang
 $color_links_decline= $params->get('decline_btn_link_color', '#37a4fc');
 
 if ($params->get('decline_icon', '')) {
-	$aliasButton_decline= '<i class="hasTooltip '.$params->get('decline_icon', '').'" title="'.$aliasButton_decline.'"></i>';
-	HTMLHelper::_('bootstrap.tooltip');
+	$aliasButton_decline= '<i class="hasTooltip '.$params->get('decline_icon', '').'" data-bs-toggle="tooltip" title="'.$aliasButton_decline.'"></i>';
 }
 
 if ($show_info && $aLink) {

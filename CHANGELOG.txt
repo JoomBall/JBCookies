@@ -1,3 +1,8 @@
+JBCookies 4.0.1 (04-01-2022)
+================================================================================
+~ Error tooltip. You have to do it from the template.
+~ Error loading customizable template.
+
 JBCookies 4.0.0 (02-12-2021)
 ================================================================================
 ~ Update only for Joomla 4.
