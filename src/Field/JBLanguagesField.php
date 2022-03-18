@@ -22,7 +22,6 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
 
-
 class JBLanguagesField extends FormField {
 
     protected $type = 'JBLanguages';

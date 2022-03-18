@@ -1,3 +1,8 @@
+JBCookies 4.0.2 (18-03-2022)
+================================================================================
+~ Failed to upload files.
+~ Remove possible error if there is no language.
+
 JBCookies 4.0.1 (04-01-2022)
 ================================================================================
 ~ Error tooltip. You have to do it from the template.
