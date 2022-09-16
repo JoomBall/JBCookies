@@ -59,7 +59,8 @@ $show_info = $params->get('show_info', 1);
 $modal_framework = $params->get('modal', 'bootstrap');
 $framework_version = $params->get('bootstrap_version', 5);
 $show_article_modal = $params->get('show_article_modal', 1);
-$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx'));
+$moduleclass_sfx	= htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
+#$class_sfx			= htmlspecialchars($params->get('class_sfx', ''), ENT_COMPAT, 'UTF-8');
 $color_border = (strpos($color_links, 'btn-') !== false) ? ' border-' . ($position == 'top' ? 'bottom' : 'top') . ' border-' . str_replace('btn-', '', $color_links) : '';
 
 $lang = Factory::getLanguage();
