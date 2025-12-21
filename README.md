@@ -1,5 +1,5 @@
 # JBCookies
-JBCookies displays information about the use of cookies for Joomla 4. The module is ready to support any multilanguage page.
+JBCookies displays information about the use of cookies for Joomla. The module is ready to support any multilanguage page.
 
 <img src="http://www.joomball.com/images/template/toolbar/icon-256-jbcookies.png" alt="JBCookies">
 <h3>Product details</h3>
@@ -13,7 +13,7 @@ JBCookies displays information about the use of cookies for Joomla 4. The module
 <li>Version of Joomla 3, 4, 5, 6</li>
 <li>3.x, 4.x, 5.x or 6.x (Default version of the core Joomla or your template)</li>
 <li>Template for Bootstrap, for example Protostar, Helixultimate</li>
-<li>PHP5, PHP7, PHP 8</li>
+<li>PHP5, PHP7, PHP8</li>
 </ul>
 <h3>After the installation</h3>
 <ul>
