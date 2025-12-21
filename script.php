@@ -1,4 +1,14 @@
 <?php
+/**
+ * @package			Joomla.Site
+ * @subpackage		Modules - mod_jbcookies
+ * 
+ * @author			JoomBall! Project
+ * @link			http://www.joomball.com
+ * @copyright		Copyright © 2011-2026 JoomBall! Project. All Rights Reserved.
+ * @license			GNU/GPL, http://www.gnu.org/licenses/gpl-3.0.html
+ */
+
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
@@ -7,23 +17,25 @@ use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Version;
 use Joomla\CMS\Language\Text;
 
-class mod_jbcookiesInstallerScript {
+class Mod_JBCookiesInstallerScript {
 	
-	protected $extension = 'mod_jbcookies';
+	protected string $extension = 'mod_jbcookies';
+	protected ?string $release = null;
+	protected ?string $last_version = null;
+	protected ?string $minimum_joomla_release = null;
 	
-	function install( $parent ) {
+	public function install( $parent ) {
 		$lang = Factory::getLanguage();
 		$basePathLanguage = JPATH_ROOT . '/media/jbmedia';
 		$lang->load('install', $basePathLanguage, null, false, true)
 			|| $lang->load('install', $basePathLanguage, $lang->getDefault(), false, true);
 		
 		$status = new stdClass();
-		
+
 		$result = null;
-		
 		self::displayInstall($parent, $result);
 		
-		?><h1><?php echo JText::_('JB_INSTALL_INSTALLATION'); ?></h1><?php
+		?><h1><?php echo Text::_('JB_INSTALL_INSTALLATION'); ?></h1><?php
 		
 		return true;
 	}
@@ -65,30 +77,55 @@ class mod_jbcookiesInstallerScript {
 		
 			// Eliminem Arxius innecesaris
 			$files = array($pathSite.'/index.html', $pathSite.'/helper.php', $pathSite.'/script.install.php',
-								$pathSite.'/tmpl/index.html',
-								$pathSite.'/language/index.html',
-									$pathSite.'/language/ca-ES/index.html', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.ini', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.sys.ini',
-									$pathSite.'/language/de-DE/index.html', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.ini', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.sys.ini',
-									$pathSite.'/language/el-GR/index.html', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.ini', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.sys.ini',
-									$pathSite.'/language/en-GB/index.html', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.ini', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.sys.ini',
-									$pathSite.'/language/es-ES/index.html', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.ini', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.sys.ini',
-									$pathSite.'/language/fr-FR/index.html', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.ini', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.sys.ini',
-									$pathSite.'/language/it-IT/index.html', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.ini', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.sys.ini',
-									$pathSite.'/language/nl-NL/index.html', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.ini', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.sys.ini',
-									$pathSite.'/language/pl-PL/index.html', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.ini', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.sys.ini',
-									$pathSite.'/language/pt-PT/index.html', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.ini', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.sys.ini',
-									$pathSite.'/language/sv-SE/index.html', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.ini', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.sys.ini');
+							$pathSite.'/tmpl/index.html',
+							$pathSite.'/language/index.html',
+							$pathSite.'/language/ca-ES/index.html', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.ini', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.sys.ini',
+							$pathSite.'/language/de-DE/index.html', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.ini', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.sys.ini',
+							$pathSite.'/language/el-GR/index.html', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.ini', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.sys.ini',
+							$pathSite.'/language/en-GB/index.html', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.ini', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.sys.ini',
+							$pathSite.'/language/es-ES/index.html', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.ini', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.sys.ini',
+							$pathSite.'/language/fr-FR/index.html', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.ini', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.sys.ini',
+							$pathSite.'/language/it-IT/index.html', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.ini', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.sys.ini',
+							$pathSite.'/language/nl-NL/index.html', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.ini', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.sys.ini',
+							$pathSite.'/language/pl-PL/index.html', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.ini', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.sys.ini',
+							$pathSite.'/language/pt-PT/index.html', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.ini', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.sys.ini',
+							$pathSite.'/language/sv-SE/index.html', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.ini', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.sys.ini');
 		
 			File::delete($files);
 			
 			self::deleteFolder($pathSite.'/assets');
 			self::deleteFolder($pathSite.'/fields');
 		}
+
+		if ($this->release <= '6.0.0') {
+			$pathSite = JPATH_SITE.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR.'mod_jbcookies';
 		
+			// Eliminem Arxius innecesaris
+			$files = array( $pathSite.'/index.html', $pathSite.'/helper.php', $pathSite.'/script.install.php', $pathSite.'/tmpl/default_custom.php', $pathSite.'/tmpl/default_decline.php',
+							$pathSite.'/tmpl/index.html',
+							$pathSite.'/language/index.html',
+							$pathSite.'/language/ca-ES/index.html', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.ini', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.sys.ini',
+							$pathSite.'/language/de-DE/index.html', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.ini', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.sys.ini',
+							$pathSite.'/language/el-GR/index.html', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.ini', $pathSite.'/language/el-GR/el-GR.mod_jbcookies.sys.ini',
+							$pathSite.'/language/en-GB/index.html', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.ini', $pathSite.'/language/en-GB/en-GB.mod_jbcookies.sys.ini',
+							$pathSite.'/language/es-ES/index.html', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.ini', $pathSite.'/language/es-ES/es-ES.mod_jbcookies.sys.ini',
+							$pathSite.'/language/fr-FR/index.html', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.ini', $pathSite.'/language/fr-FR/fr-FR.mod_jbcookies.sys.ini',
+							$pathSite.'/language/it-IT/index.html', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.ini', $pathSite.'/language/it-IT/it-IT.mod_jbcookies.sys.ini',
+							$pathSite.'/language/nl-NL/index.html', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.ini', $pathSite.'/language/nl-NL/nl-NL.mod_jbcookies.sys.ini',
+							$pathSite.'/language/pl-PL/index.html', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.ini', $pathSite.'/language/pl-PL/pl-PL.mod_jbcookies.sys.ini',
+							$pathSite.'/language/pt-PT/index.html', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.ini', $pathSite.'/language/pt-PT/pt-PT.mod_jbcookies.sys.ini',
+							$pathSite.'/language/sv-SE/index.html', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.ini', $pathSite.'/language/sv-SE/sv-SE.mod_jbcookies.sys.ini');
+		
+			File::delete($files);
+			
+			self::deleteFolder($pathSite.'/assets');
+			self::deleteFolder($pathSite.'/fields');
+		}
+
 		// Afegim plantilla
 		self::displayInstall($installer, $result);
 		
-		?><h1><?php echo JText::_('JB_INSTALL_UPDATE'); ?></h1><?php
+		?><h1><?php echo Text::_('JB_INSTALL_UPDATE'); ?></h1><?php
 		
 		$jversion = new Version();
 		
@@ -105,8 +142,8 @@ class mod_jbcookiesInstallerScript {
 
 		return true;
 	}
-	
-	function getParam( $name ) {
+
+	public function getParam( $name ) {
 		$db = Factory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = ' . $db->quote($this->extension));
 		$manifest = json_decode($db->loadResult(), true);

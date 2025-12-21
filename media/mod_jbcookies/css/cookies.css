@@ -1,0 +1,264 @@
+/* .jb-cookie {
+	position: fixed;
+	z-index: 1035;
+	width: 100%!important;
+	height: auto;
+	font-size: 14px;
+	display: none;
+	box-shadow: 0 2px 8px #aaa;
+	left: 0;
+	right: 0;
+	float: none!important;
+	text-shadow: none;
+	margin: 0 auto!important;
+	max-width: 24.2em;
+	border-radius: 0.35em !important;
+} */
+
+.jb-cookie .modal-dialog {
+	max-width: 24.2em;
+}
+
+/* .jb-cookie-body {
+	padding: 10px;
+} */
+
+.jb-cookie .modal-footer {
+	display: block;
+	text-align: center;
+}
+
+/* .jb-cookie.center {
+	top: 35%;
+}
+
+.jb-cookie.top {
+	top: 20px;
+}
+
+.jb-cookie.bottom {
+	bottom: 20px;
+} */
+
+/* .jb-cookie.left p.jb-cookie-title, .jb-cookie.right p.jb-cookie-title {
+	font-weight: normal;
+} */
+/* .jb-cookie.left, .jb-cookie.right {
+	top: auto;
+	bottom: 20px;
+}
+
+.jb-cookie.left {
+	left: 1.25em;
+    right: auto;
+}
+
+.jb-cookie.right {
+	left: auto;
+    right: 1.25em;
+}
+
+.jb-cookie.left .jb-cookie-bg, .jb-cookie.right .jb-cookie-bg {
+	border-radius: 0.35em !important;
+} */
+
+/* @media (max-width: 440px) {
+	.jb-cookie.left, .jb-cookie.right {
+		left: 0;
+		right: 0;
+		margin: auto !important;
+		width: 90% !important;
+	}
+} */
+
+/* .jb-cookie div.jb-cookie-bg {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0; 
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+	position: absolute;
+	z-index: -1;
+}
+
+.jb-cookie-bg.black {
+	background-color: black;
+}
+
+.jb-cookie-bg.white {
+	background-color: white;
+}
+
+.jb-cookie.black {
+	color: white;
+}
+
+.jb-cookie.white {
+	color: black;
+} */
+
+/* .jb-cookie p.jb-cookie-title {
+	font-size: 17px;
+	font-weight: bold;
+	margin-left: 15px;
+	margin-right: 15px;
+	line-height: 25px;
+}
+
+.jb-btn {
+	cursor: pointer;
+	font-size: 14px;
+	margin: 10px auto 5px auto;
+	min-width: 100px;
+	border-radius: 4px;
+	float: none!important;
+}
+*/
+
+.jb-cookie .modal-body {
+	padding: 30px;
+}
+.jb-cookie-decline {
+	cursor: pointer;
+	position: fixed;
+	bottom: 15px;
+	z-index: 1000;
+}
+
+.jb-cookie-decline.right {
+	right: 30px;
+	left: auto;
+	margin-left: 30px;
+}
+
+.jb-cookie-decline.left {
+	left: 30px;
+	right: auto;
+	margin-right: 30px;
+}
+
+.jb-cookie-decline .btn {
+	font-size: 10px;
+	padding: 6px;
+	border-radius: 50px;
+	border: none;
+}
+
+.jb-cookie-decline img {
+	display: inline;
+	height: 26px;
+	width: 26px;
+}
+
+.jb-cookie-title {
+	font-size: 17px;
+	font-weight: 600;
+}
+.jb-cookie-text {
+	font-size: 15px;
+}
+
+.jb-policy {
+	display: block;
+	padding: 10px;
+}
+
+
+/* COLORS LINKS */
+/* .jb-cookie.top.blue .jb-cookie-bg.white, .jb-cookie.top.blue .jb-cookie-bg.black {
+	border-bottom: 1px solid #0089f2;
+}
+
+.jb-cookie.top.green .jb-cookie-bg.white, .jb-cookie.top.green .jb-cookie-bg.black {
+	border-bottom: 1px solid #52a552;
+}
+
+.jb-cookie.top.orange .jb-cookie-bg.white, .jb-cookie.top.orange .jb-cookie-bg.black {
+	border-bottom: 1px solid #e88a05;
+}
+
+.jb-cookie.top.red .jb-cookie-bg.white, .jb-cookie.top.red .jb-cookie-bg.black {
+	border-bottom: 1px solid #dd2f26;
+}
+
+.jb-cookie.bottom.blue .jb-cookie-bg.white, .jb-cookie.bottom.blue .jb-cookie-bg.black {
+	border-top: 1px solid #0089f2;
+}
+
+.jb-cookie.bottom.green .jb-cookie-bg.white, .jb-cookie.bottom.green .jb-cookie-bg.black {
+	border-top: 1px solid #52a552;
+}
+
+.jb-cookie.bottom.orange .jb-cookie-bg.white, .jb-cookie.bottom.orange .jb-cookie-bg.black {
+	border-top: 1px solid #e88a05;
+}
+
+.jb-cookie.bottom.red .jb-cookie-bg.white, .jb-cookie.bottom.red .jb-cookie-bg.black {
+	border-top: 1px solid #dd2f26;
+}
+
+.jb-cookie.blue p a {
+	color: #0089f2;
+}
+
+.jb-cookie.green p a {
+	color: #52a552;
+}
+
+.jb-cookie.orange p a {
+	color: #e88a05;
+}
+
+.jb-cookie.red p a {
+	color: #dd2f26;
+}
+
+.jb-btn.blue {
+	background: #0089f2;
+	border: 1px solid #0654b3;
+	color: #ffffff;
+}
+
+.jb-btn.green {
+	background: #52a552;
+	border: 1px solid #008000;
+	color: #ffffff;
+}
+
+.jb-btn.orange {
+	background: #e88a05;
+	border: 1px solid #8a5203;
+	color: #ffffff;
+}
+
+.jb-btn.red {
+	background: #dd2f26;
+	border: 1px solid #9c0404;
+	color: #ffffff;
+}
+
+.jb-cookie-decline .blue {
+	background: #0089f2;
+	color: #ffffff;
+}
+
+.jb-cookie-decline .green {
+	background: #52a552;
+	color: #ffffff;
+}
+
+.jb-cookie-decline .orange {
+	background: #e88a05;
+	color: #ffffff;
+}
+
+.jb-cookie-decline .red {
+	background: #dd2f26;
+	color: #ffffff;
+} */
+
+/* MODAL */
+/* #jbcookies {
+	color: #333;
+} */

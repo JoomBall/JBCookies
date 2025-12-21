@@ -17,9 +17,9 @@ use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Installer\Installer;
 
-class JbmessageField extends FormField {
+class JBMessageField extends FormField {
 
-    protected $type = 'jbmessage';
+    protected $type = 'JBMessage';
 
     protected function getInput() {
     	

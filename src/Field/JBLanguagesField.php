@@ -21,6 +21,8 @@ use Joomla\CMS\Session\Session;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Log\Log;
+use RuntimeException;
 
 class JBLanguagesField extends FormField {
 
@@ -50,10 +52,10 @@ class JBLanguagesField extends FormField {
 		$hintText			= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_TEXT') . '"';
 		$hintHeader			= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_HEADER') . '"';
 		$hintBody			= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_BODY') . '"';
-		$hintDecline		= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_DECLINE') . '"';
-		$hintAliasButton	= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_ALIAS_BUTTON') . '"';
-		$hintAliasLink		= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_ALIAS_LINK') . '"';
-		$hintAlink			= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_ALINK') . '"';		
+		$hintReject		= ' placeholder="' . Text::_('MOD_JBCOOKIES_ACTION_REJECT') . '"';
+		$hintAccept	= ' placeholder="' . Text::_('MOD_JBCOOKIES_GLOBAL_ACCEPT') . '"';
+		// $hintAliasLink		= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_ALIAS_LINK') . '"';
+		// $hintAlink			= ' placeholder="' . Text::_('MOD_JBCOOKIES_LANG_ALINK') . '"';		
 
 		// Initialize some field attributes.
 		$class        = !empty($this->class) ? ' class="' . $this->class . '"' : '';
@@ -100,10 +102,19 @@ class JBLanguagesField extends FormField {
 				$params[$lang['tag']]['text']			= '';
 				$params[$lang['tag']]['header']			= '';
 				$params[$lang['tag']]['body']			= '';
-				$params[$lang['tag']]['text_decline']	= '';
-				$params[$lang['tag']]['alias_button']	= '';
-				$params[$lang['tag']]['alias_link']		= '';
-				$params[$lang['tag']]['alink']			= '';
+				$params[$lang['tag']]['reject']	= '';
+				$params[$lang['tag']]['accept']	= '';
+				// $params[$lang['tag']]['alias_link']		= '';
+				// $params[$lang['tag']]['alink']			= '';
+			} else {
+				$params[$lang['tag']]['title']			= $params[$lang['tag']]['title'] ?? '';
+				$params[$lang['tag']]['text']			= $params[$lang['tag']]['text'] ?? '';
+				$params[$lang['tag']]['header']			= $params[$lang['tag']]['header'] ?? '';
+				$params[$lang['tag']]['body']			= $params[$lang['tag']]['body'] ?? '';
+				$params[$lang['tag']]['reject']	= $params[$lang['tag']]['reject'] ?? '';
+				$params[$lang['tag']]['accept']	= $params[$lang['tag']]['accept'] ?? '';
+				// $params[$lang['tag']]['alias_link']		= $params[$lang['tag']]['alias_link'] ?? '';
+				// $params[$lang['tag']]['alink']			= $params[$lang['tag']]['alink'] ?? '';
 			}
 			
 			// Article
@@ -154,7 +165,7 @@ class JBLanguagesField extends FormField {
 				}
 				catch (RuntimeException $e)
 				{
-					JError::raiseWarning(500, $e->getMessage());
+					Log::add($e->getMessage(), Log::WARNING, 'jerror');
 				}
 			}
 	
@@ -162,7 +173,8 @@ class JBLanguagesField extends FormField {
 			{
 				$title = Text::_('COM_CONTENT_SELECT_AN_ARTICLE');
 			}
-			$title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+			
+			// $title = htmlspecialchars($title, ENT_COMPAT, 'UTF-8');
 			
 			// The active article id field.
 			if (0 == (int) $params[$lang['tag']]['alink'])
@@ -190,56 +202,47 @@ class JBLanguagesField extends FormField {
 			
 			$html .= '<div class="row">';
 			
-//				$html .= '<div class="col-12">';
-				
-					// Title
-					$html .= '<div class="col-3">';
-						$html .= '<div class="control-group">';
-							$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][title]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class . $hintTitle . ' >'
-							. htmlspecialchars($params[$lang['tag']]['title'], ENT_COMPAT, 'UTF-8') . '</textarea>';
-						$html .= '</div>';
-					$html .= '</div>';
-					// Text
-					$html .= '<div class="col-3">';
-						$html .= '<div class="control-group">';
-							$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][text]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintText . ' >'
-							. htmlspecialchars($params[$lang['tag']]['text'], ENT_COMPAT, 'UTF-8') . '</textarea>';
-						$html .= '</div>';
-					$html .= '</div>';
-					// Body Modal
-					$html .= '<div class="col-3">';
-						$html .= '<div class="control-group">';
-							$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][body]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintBody . ' >'
-							. htmlspecialchars($params[$lang['tag']]['body'], ENT_COMPAT, 'UTF-8') . '</textarea>';
-						$html .= '</div>';
-					$html .= '</div>';
-					// Decline
-					$html .= '<div class="col-3">';
-						$html .= '<div class="control-group">';
-							$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][text_decline]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintDecline . ' >'
-							. htmlspecialchars($params[$lang['tag']]['text_decline'], ENT_COMPAT, 'UTF-8') . '</textarea>';
-						$html .= '</div>';
+				// Title
+				$html .= '<div class="col-3">';
+					$html .= '<div class="control-group">';
+						$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][title]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class . $hintTitle . ' >'
+						. $params[$lang['tag']]['title'] . '</textarea>';
 					$html .= '</div>';
 				$html .= '</div>';
-//			$html .= '</div>';
+				// Text
+				$html .= '<div class="col-3">';
+					$html .= '<div class="control-group">';
+						$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][text]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintText . ' >'
+						. $params[$lang['tag']]['text'] . '</textarea>';
+					$html .= '</div>';
+				$html .= '</div>';
+				// Body Modal
+				$html .= '<div class="col-3">';
+					$html .= '<div class="control-group">';
+						$html .= '<textarea name="' . $this->name . '['.$lang['tag'].'][body]' . '" id="' . $this->id . '_' . $lang['tag'] . '"' . $columns . $rows . $class	. $hintBody . ' >'
+						. $params[$lang['tag']]['body'] . '</textarea>';
+					$html .= '</div>';
+				$html .= '</div>';
+			$html .= '</div>';
+
 			$html .= '<div class="row">';
 			
+				// Alias Reject
+				$html .= '<div class="col-3">';
+					$html .= '<div class="control-group">';
+						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][reject]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . $params[$lang['tag']]['reject'] . '"' . $class . $hintReject . ' >';
+					$html .= '</div>';
+				$html .= '</div>';
 				// Alias Button
 				$html .= '<div class="col-3">';
 					$html .= '<div class="control-group">';
-						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][alias_button]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['alias_button'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintAliasButton . ' >';
-					$html .= '</div>';
-				$html .= '</div>';
-				// Alias Link
-				$html .= '<div class="col-3">';
-					$html .= '<div class="control-group">';
-						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][alias_link]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['alias_link'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintAliasLink . ' >';
+						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][accept]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . $params[$lang['tag']]['accept'] . '"' . $class . $hintAccept . ' >';
 					$html .= '</div>';
 				$html .= '</div>';
 				// Header Modal
 				$html .= '<div class="col-3">';
 					$html .= '<div class="control-group">';
-						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][header]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . htmlspecialchars($params[$lang['tag']]['header'], ENT_COMPAT, 'UTF-8') . '"' . $class . $hintHeader . ' >';
+						$html .= '<input type="text" name="' . $this->name . '['.$lang['tag'].'][header]' . '" id="' . $this->id . '_' . $lang['tag'] . '" value="' . $params[$lang['tag']]['header'] . '"' . $class . $hintHeader . ' >';
 					$html .= '</div>';
 				$html .= '</div>';
 				// Article Link

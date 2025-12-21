@@ -1,3 +1,21 @@
+JBCookies 6.0.0 (20-12-2025)
+================================================================================
++ Joomla 5 and Joomla 6.
++ Admin: Button to add existing cookies from the website in home page.
++ Admin: Parameters are removed and new parameters are added.
++ Site: The module only works with templates that use Bootstrap.
++ Site: Cookie notice and settings (New) via modal.
++ Site: Accept, Settings, and Reject buttons.
+~ Languages:	ca-ES (Catalan), es-ES (Spanish), en-GB (United Kingdom), be-BY (Belarusian),
+				de-DE (German), el-GR (Greek), fr-FR (French), it-IT (Italian) , nl-NL (Dutch),
+				pl-PL (Polish), pt-PT (Portuguese), ru-RU (Russian), sv-SE (Swedish), ch-CN (Chinese, Simplified)
+
+JBCookies 4.0.4 (01-11-2024)
+================================================================================
++ New layout left & right position.
++ New icon svg for decline button.
++ New position for decline button.
+
 JBCookies 4.0.3 (16-09-2022)
 ================================================================================
 ~ Bug fixe: Solved htmlspecialchars() PHP 8.

@@ -18,7 +18,7 @@ use Joomla\CMS\Language\Text;
 
 class JBButtonsField extends FormField {
 
-    protected $type = 'Jbbuttons';
+    protected $type = 'JBButtons';
 
     public function getLabel() {
         return;
