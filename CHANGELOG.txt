@@ -1,3 +1,8 @@
+JBCookies 6.0.1 (02-01-2025)
+================================================================================
+~ New Url Update: https://www.joomball.com/updates/mod_jbcookies.xml
++ Language: hu-HU (Hungarian) By István.
+
 JBCookies 6.0.0 (20-12-2025)
 ================================================================================
 + Joomla 5 and Joomla 6.

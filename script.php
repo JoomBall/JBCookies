@@ -97,12 +97,12 @@ class Mod_JBCookiesInstallerScript {
 			self::deleteFolder($pathSite.'/fields');
 		}
 
-		if ($this->release <= '6.0.0') {
+		if ($this->release <= '6.0.1') {
 			$pathSite = JPATH_SITE.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR.'mod_jbcookies';
 		
 			// Eliminem Arxius innecesaris
 			$files = array( $pathSite.'/index.html', $pathSite.'/helper.php', $pathSite.'/script.install.php', $pathSite.'/tmpl/default_custom.php', $pathSite.'/tmpl/default_decline.php',
-							$pathSite.'/tmpl/index.html',
+							$pathSite.'/tmpl/index.html', $pathSite.'/mod_jbcookies.php',
 							$pathSite.'/language/index.html',
 							$pathSite.'/language/ca-ES/index.html', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.ini', $pathSite.'/language/ca-ES/ca-ES.mod_jbcookies.sys.ini',
 							$pathSite.'/language/de-DE/index.html', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.ini', $pathSite.'/language/de-DE/de-DE.mod_jbcookies.sys.ini',
