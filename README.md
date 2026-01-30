@@ -6,7 +6,7 @@ JBCookies displays information about the use of cookies for Joomla. The module i
 <p><strong>Package:</strong>&nbsp; <img src="http://www.joomball.com/images/template/ext_mod.png" alt="Module"> <em><br></em></p>
 <p><strong>Compatibility:</strong> <em>Joomla 3, 4, 5, 6</em></p>
 <p><strong>License:</strong> <em>Non-Commercial</em></p>
-<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE), Dutch (nl-NL), Polish (pl-PL), Portuguese (pt-PT), Swedish (sv-SE), Greek (el-GR) (by Makis Chatzopoulos), French (fr-FR) (by Pascal)</em></p>
+<p><strong>Languages:</strong> <em>English (en-GB), Spanish(es-ES), Catalan (ca-ES), Italian (it-IT), German (de-DE), Dutch (nl-NL), Polish (pl-PL), Portuguese (pt-PT), Swedish (sv-SE), Greek (el-GR) (by Makis Chatzopoulos), French (fr-FR) (by Pascal), Czech (cs-CZ) (by pihrt.com)</em></p>
 
 <h3>Requirements for installation</h3>
 <ul>
