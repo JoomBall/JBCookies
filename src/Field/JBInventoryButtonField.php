@@ -16,8 +16,8 @@ namespace JB\Module\JBCookies\Site\Field;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
+use JB\Module\JBCookies\Site\Helper\JbcookiesHelper;
 
 class JBInventoryButtonField extends FormField
 {
@@ -26,8 +26,10 @@ class JBInventoryButtonField extends FormField
     protected function getInput()
     {
         $app = Factory::getApplication();
-        $token = Session::getFormToken();
         $siteRoot = Uri::root();
+        $scanExpires = time() + 300;
+        $scanSignature = JbcookiesHelper::createScanSignature($scanExpires);
+        $scanParams = '&scan_expires=' . $scanExpires . '&scan_signature=' . rawurlencode($scanSignature);
 
         // Detect if language filter plugin is enabled and get default language prefix
         $langPrefix = '';
@@ -53,11 +55,11 @@ class JBInventoryButtonField extends FormField
         // Build URL: if language prefix exists, omit index.php for proper routing
         if ($langPrefix)
         {
-            $url = $siteRoot . $langPrefix . '?option=com_ajax&module=jbcookies&method=inventory&format=json&mode=scan&' . $token . '=1';
+            $url = $siteRoot . $langPrefix . '?option=com_ajax&module=jbcookies&method=inventory&format=json&mode=scan' . $scanParams;
         }
         else
         {
-            $url = $siteRoot . 'index.php?option=com_ajax&module=jbcookies&method=inventory&format=json&mode=scan&' . $token . '=1';
+            $url = $siteRoot . 'index.php?option=com_ajax&module=jbcookies&method=inventory&format=json&mode=scan' . $scanParams;
         }
         $label = Text::_($this->element['buttontext'] ?? 'MOD_JBCOOKIES_FIELD_INVENTORY_BUTTON_TEXT');
         

@@ -1,3 +1,9 @@
+JBCookies 6.0.3 (06-11-2026)
+================================================================================
+~ Fixed and secured the cookie scan button.
++ Added a Google Analytics 4 (GA4) configuration option.
++ Added changelog support to the extension update modal.
+
 JBCookies 6.0.2 (15-01-2025)
 ================================================================================
 ~ Fixed the display of the modal in the Brave browser.

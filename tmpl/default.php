@@ -43,7 +43,7 @@ $policyTitleText    = $header ?: Text::_('MOD_JBCOOKIES_GLOBAL_POLICY_COOKIES');
 					<?php if ($aLink) : ?>
 						<a class="jb-policy" href="<?php echo $item->readmore_link; ?>" rel="nofollow"><?php echo Text::_('MOD_JBCOOKIES_GLOBAL_POLICY_COOKIES'); ?></a>
 					<?php else: ?>
-						<a class="jb-policy" href="#jb-privacy-policy" data-bs-toggle="modal" data-bs-target="#jb-privacy-policy" rel="nofollow"><?php echo Text::_('MOD_JBCOOKIES_GLOBAL_POLICY_COOKIES'); ?></a>
+						<div type="button" class="link-primary jb-policy" data-bs-toggle="modal" data-bs-target="#jb-privacy-policy" aria-label="<?php echo Text::_('MOD_JBCOOKIES_GLOBAL_POLICY_COOKIES'); ?>" rel="nofollow"><?php echo Text::_('MOD_JBCOOKIES_GLOBAL_POLICY_COOKIES'); ?></div>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>

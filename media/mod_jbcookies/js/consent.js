@@ -48,7 +48,11 @@
 			});
 
 			jQuery(document).on('click', '.jb-save-selection', function () {
-				persistConsent('custom');
+				var preferences = collectPreferences();
+				if (!preferences.analytics) {
+					clearCookieGroup('analytics');
+				}
+				persistConsentCombined('custom', preferences);
 				hidePreferencesModal();
 				banner.hide();
 				showDeclinePanel();
@@ -56,6 +60,7 @@
 
 			jQuery('.jb-privacy-reopen').on('click', function () {
 				eraseCookie('jbcookies');
+				// setAllToggles(true);
 				decline.fadeOut('slow', function () {
 					banner.show();
 				});
@@ -149,6 +154,22 @@
 			setCookieValue(name, '', -365);
 		}
 
+		function eraseAnalyticsCookie(name) {
+			eraseCookie(name);
+
+			var hostParts = window.location.hostname.split('.');
+			for (var index = 0; index < hostParts.length - 1; index++) {
+				var cookieDomain = hostParts.slice(index).join('.');
+				if (cookieDomain.indexOf('.') === -1) {
+					continue;
+				}
+
+				var expires = new Date();
+				expires.setDate(expires.getDate() - 365);
+				document.cookie = name + '=; expires=' + expires.toUTCString() + '; path=/; domain=' + cookieDomain;
+			}
+		}
+
 		function getCookieValue(name) {
 			if (!name) {
 				return '';
@@ -166,7 +187,12 @@
 					return;
 				}
 
-				var cookies = inventory[group] || [];
+				clearCookieGroup(group);
+			});
+		}
+
+		function clearCookieGroup(group) {
+			var cookies = inventory[group] || [];
 
 				cookies.forEach(function (item) {
 					if (!item || !item.name) {
@@ -197,16 +223,15 @@
 							}
 
 							if (cookieLower.indexOf(prefix) === 0) {
-								eraseCookie(cookieName);
+								eraseAnalyticsCookie(cookieName);
 							}
 						});
 
 						return;
 					}
 
-					eraseCookie(item.name);
+						eraseAnalyticsCookie(item.name);
 				});
-			});
 		}
 
 		function hidePreferencesModal() {

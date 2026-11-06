@@ -35,8 +35,10 @@ $inventoryByGroup  = $cookiePreferencesConfig['inventory'] ?? [];
 										<?php endif; ?>
 									</div>
 									<div class="form-check form-switch">
-										<input class="form-check-input jb-privacy-toggle" type="checkbox" role="switch" id="<?php echo $groupId; ?>" data-group="<?php echo $groupSlug; ?>" data-default="<?php echo $group['default'] ? '1' : '0'; ?>" <?php echo $group['required'] ? 'checked disabled' : 'checked'; ?>>
-										<label class="form-check-label small" for="<?php echo $groupId; ?>"></label>
+										<input class="form-check-input jb-privacy-toggle" type="checkbox" role="switch" id="<?php echo $groupId; ?>" data-group="<?php echo $groupSlug; ?>" data-default="<?php echo $group['default'] ? '1' : '0'; ?>" <?php echo $group['required'] || $group['default'] ? 'checked' : ''; ?> <?php echo $group['required'] ? 'disabled' : ''; ?>>
+										<label class="form-check-label visually-hidden" for="<?php echo $groupId; ?>">
+											<?php echo htmlspecialchars($group['title'], ENT_QUOTES, 'UTF-8'); ?>
+										</label>
 									</div>
 								</div>
 								<?php if ($groupCookies) : ?>

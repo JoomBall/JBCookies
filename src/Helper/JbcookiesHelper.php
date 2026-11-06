@@ -139,6 +139,7 @@ class JbcookiesHelper
         ];
 
         $this->injectConsentScript($cookiePreferencesConfig);
+        $this->injectGoogleAnalytics($params);
 
         $cookiePreferencesConfig['groups'] = $cookieGroups;
 
@@ -165,6 +166,13 @@ class JbcookiesHelper
         return $helper->inventory();
     }
 
+    public static function createScanSignature(int $expires): string
+    {
+        $secret = (string) Factory::getConfig()->get('secret', '');
+
+        return $secret === '' ? '' : hash_hmac('sha256', 'mod_jbcookies.scan|' . $expires, $secret);
+    }
+
     public static function detectAjax()
     {
         try
@@ -184,19 +192,8 @@ class JbcookiesHelper
         try
         {
             $helper = new self();
-
-            $app   = Factory::getApplication();
-            $input = $app->getInput();
-            $urls  = $input->get('urls', [], 'array');
-            $urls  = $helper->sanitiseUrls($urls);
-            $urls  = $urls ?: [$helper->getSiteRootUrl()];
-
-            $found = [];
-
-            foreach ($urls as $url)
-            {
-                $found = array_merge($found, $helper->scanUrl($url));
-            }
+            $helper->authoriseCookieScan();
+            $found = $helper->scanUrl($helper->getSiteRootUrl());
 
             return InventoryHelper::normaliseDetectedCookies($found);
         }
@@ -214,9 +211,11 @@ class JbcookiesHelper
         $mode  = $input->getCmd('mode', 'list');
         $format = $input->getCmd('format', 'json');
 
-        // Autorizar según el modo (no por token, ya que puede venir de admin con token distinto)
-        // 'scan' y 'detect' NO requieren autorización para evitar 403 por diferencia de sesión admin/site
-        if (in_array($mode, ['register'], true))
+        if ($mode === 'scan')
+        {
+            $this->authoriseCookieScan();
+        }
+        elseif ($mode === 'register')
         {
             $this->authoriseScan();
         }
@@ -230,17 +229,7 @@ class JbcookiesHelper
                     break;
 
                 case 'scan':
-                    $urls  = $input->get('urls', [], 'array');
-                    $urls  = $this->sanitiseUrls($urls);
-                    $urls  = $urls ?: [$this->getSiteRootUrl()];
-                    $found = [];
-
-                    foreach ($urls as $url)
-                    {
-                        $found = array_merge($found, $this->scanUrl($url));
-                    }
-
-                    $result = InventoryHelper::normaliseDetectedCookies($found);
+                    $result = InventoryHelper::normaliseDetectedCookies($this->scanUrl($this->getSiteRootUrl()));
                     break;
 
                 case 'register':
@@ -331,6 +320,25 @@ class JbcookiesHelper
         }
     }
 
+    protected function authoriseCookieScan(): void
+    {
+        $input     = Factory::getApplication()->getInput();
+        $expires   = $input->getInt('scan_expires', 0);
+        $signature = $input->getString('scan_signature', '');
+
+        if ($expires < time() || $expires > time() + 300 || !preg_match('/^[a-f0-9]{64}$/i', $signature))
+        {
+            throw new RuntimeException(Text::_('JGLOBAL_AUTH_ACCESS_DENIED'), 403);
+        }
+
+        $expected = self::createScanSignature($expires);
+
+        if ($expected === '' || !hash_equals($expected, $signature))
+        {
+            throw new RuntimeException(Text::_('JGLOBAL_AUTH_ACCESS_DENIED'), 403);
+        }
+    }
+
     protected function scanUrl(string $url): array
     {
         $cookies = [];
@@ -342,15 +350,13 @@ class JbcookiesHelper
 
         try
         {
-            $options = [];
+            $options = ['follow_location' => false];
             
             if ($isDevHost && strpos($url, 'https://') === 0)
             {
-                $options = [
-                    'transport.curl' => [
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_SSL_VERIFYHOST => false,
-                    ],
+                $options['transport.curl'] = [
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_SSL_VERIFYHOST => false,
                 ];
             }
 
@@ -364,6 +370,7 @@ class JbcookiesHelper
                 try
                 {
                     $client   = HttpFactory::getHttp([
+                        'follow_location' => false,
                         'transport.curl' => [
                             CURLOPT_SSL_VERIFYPEER => false,
                             CURLOPT_SSL_VERIFYHOST => false,
@@ -477,30 +484,6 @@ class JbcookiesHelper
         }
 
         return $attributes;
-    }
-
-    protected function sanitiseUrls(array $urls): array
-    {
-        $clean = [];
-
-        foreach ($urls as $url)
-        {
-            $url = trim((string) $url);
-
-            if ($url === '')
-            {
-                continue;
-            }
-
-            if (!preg_match('#^https?://#i', $url))
-            {
-                $url = Uri::root() . ltrim($url, '/');
-            }
-
-            $clean[] = $url;
-        }
-
-        return array_unique($clean);
     }
 
     protected function renderInventoryConsole(array $result, string $mode): string
@@ -677,6 +660,106 @@ HTML;
         $configJson = json_encode($config, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
         // Keep config inline (tiny) and load the runtime from a cached asset.
         $document->addScriptDeclaration('window.JBCOOKIES_CONFIG = ' . $configJson . ';');
+    }
+
+    protected function injectGoogleAnalytics(Registry $params): void
+    {
+        $measurementId = trim((string) $params->get('ga_gtag', ''));
+
+        if (!preg_match('/^G-[A-Z0-9]+$/i', $measurementId))
+        {
+            return;
+        }
+
+        $groupSlugs = array_column($this->buildOrderedGroupsFromParams($params), 'slug');
+
+        if (!in_array('analytics', $groupSlugs, true))
+        {
+            return;
+        }
+
+        $measurementIdJson = json_encode($measurementId, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+        $initialConsent    = $this->hasAnalyticsConsent() ? 'true' : 'false';
+        $script = sprintf(<<<'JS'
+(function (window, document, measurementId, initialConsent) {
+    window.JBCOOKIES_GA = window.JBCOOKIES_GA || {};
+    if (window.JBCOOKIES_GA[measurementId]) {
+        return;
+    }
+    window.JBCOOKIES_GA[measurementId] = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window['ga-disable-' + measurementId] = true;
+    window.gtag('consent', 'default', { analytics_storage: 'denied' });
+
+    var loaded = false;
+    function setAnalyticsConsent(allowed) {
+        window['ga-disable-' + measurementId] = !allowed;
+        window.gtag('consent', 'update', { analytics_storage: allowed ? 'granted' : 'denied' });
+
+        if (!allowed || loaded) {
+            return;
+        }
+
+        loaded = true;
+        window.gtag('js', new Date());
+        window.gtag('config', measurementId);
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+        document.head.appendChild(script);
+    }
+
+    function hasAnalyticsConsent(consent) {
+        if (!consent || (consent.status !== 'allow' && consent.status !== 'custom')) {
+            return false;
+        }
+
+        var value = consent.preferences && consent.preferences.analytics;
+        return value === 1 || value === '1' || value === true;
+    }
+
+    setAnalyticsConsent(initialConsent);
+    document.addEventListener('jbcookies:update', function (event) {
+        setAnalyticsConsent(hasAnalyticsConsent(event.detail));
+    });
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.closest && event.target.closest('.jb-privacy-reopen')) {
+            setAnalyticsConsent(false);
+        }
+    }, true);
+})(window, document, %s, %s);
+JS, $measurementIdJson, $initialConsent);
+
+        Factory::getDocument()->addScriptDeclaration($script);
+    }
+
+    protected function hasAnalyticsConsent(): bool
+    {
+        $rawConsent = $_COOKIE['jbcookies'] ?? '';
+
+        if (!is_string($rawConsent) || $rawConsent === '')
+        {
+            return false;
+        }
+
+        $consent = json_decode($rawConsent, true);
+
+        if (!is_array($consent))
+        {
+            $consent = json_decode(rawurldecode($rawConsent), true);
+        }
+
+        if (!is_array($consent) || !in_array($consent['status'] ?? '', ['allow', 'custom'], true))
+        {
+            return false;
+        }
+
+        $value = $consent['preferences']['analytics'] ?? null;
+
+        return $value === 1 || $value === '1' || $value === true;
     }
 
     protected function renderInventoryError(Throwable $exception): string
